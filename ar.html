@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>St Christopher</title>
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./pages/main/main.css" />
+    <link rel="stylesheet" href="public/assets/css/plugin.css" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="public/assets/css/dark.css" />
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="public/assets/css/responsive.css" />
+    <!-- import the webpage's javascript file -->
+
+    <script src="./pages/main/main.js"></script>
+  </head>
+
+  <body>
+    <div id="preloader">
+      <div class="loader-logo text-center">
+        <img
+          src="https://beta-supercruisr.neocities.org/assets/white.png"
+          alt=""
+        />
+        <p>LOADING<br>CHRISTOPHER</p>
+      </div>
+    </div>
+
+    <!-- Start Header -->
+
+    <nav>
+      <div class="logo">
+        <a href="index.html"
+          ><img
+            src="https://beta-supercruisr.neocities.org/assets/white.png"
+            alt="logo"
+        /></a>
+      </div>
+      <div class="toggle-btn">
+        <div class="burger-menu">
+          <span class="one"></span>
+          <span class="two"></span>
+          <span class="tre"></span>
+        </div>
+      </div>
+
+      <div class="bg-nav"></div>
+
+      <div class="manu-container">
+        <div class="menu">
+          <div class="data">
+            <div class="container">
+              <ul>
+                <li>
+                  <a class="menu-link" href="/public/index.html"
+                    >Home</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="background">
+      <!-- to be removed on release -->
+
+      <br /><br /><br /><br /><br /><br />
+      <div class="content">
+        <p class="lead">Build WebXR</p>
+        <p class="paragraph">
+          My site is a development environment for creating
+            augmented web experiences. You can create location or marker-based AR
+            applications and deploy them straight to web <br />Using this page doesn’t require
+          any knowledge of coding. You can start working on your content now.
+        </p>
+
+        <img class="splashscreen" src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fa1f36298-9f74-4b84-b0cd-fb96b98893cc_White%20Clay.png" />
+
+        <p class="lead">Pick your project type</p>
+
+        <div>
+          <label class="radio-container paragraph">
+            Location-based
+            <input
+              id="location"
+              type="radio"
+              name="radio"
+              onclick="radioOnclick(this)"
+            />
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="radio-container paragraph">
+            Marker-based
+            <input
+              id="marker"
+              type="radio"
+              name="radio"
+              onclick="radioOnclick(this)"
+            />
+            <span class="checkmark"></span>
+          </label>
+
+          <a
+            onclick="anchorOnclick(this)"
+            id="start-building"
+            class="primary-button"
+            >Start building</a
+          >
+          <div id="error" class="error" style="visibility: hidden;">
+            Please, select a project type.
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="public/assets/js/plugin.js"></script>
+    <script src="public/assets/js/main.js"></script>
+  </body>
+</html>

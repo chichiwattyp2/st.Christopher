@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>St Christopher</title>
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="././style.css" />
+    <link rel="stylesheet" href="../pages/main/main.css" />
+
+    <!-- import the webpage's javascript file -->
+
+    <script src="./pages/main/main.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <style>
+        a {
+          display: grid;
+          grid-template-columns: auto auto;
+          justify-content: left;
+          align-content: center;
+          text-decoration: none;
+          height: 5em;
+          width: 12.5em;
+          padding-left: 1.875em;
+        }
+
+        p {
+          font-family: Telegraf;
+          font-style: normal;
+          font-weight: bold;
+          line-height: 1.625em;
+          padding-left: 0.625em;
+          margin-left: 1em;
+          font-size: 1.25em;
+          color: black;
+        }
+
+        .lead {
+          font-family: Telegraf;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 1.75em;
+          line-height: 140%;
+        }
+
+        .buttons > button,
+        .buttons > a {
+          margin-left: 3.125em;
+          cursor: pointer;
+        }
+
+        .primary-button,
+        .passive-button {
+          display: inline-block;
+          font-family: Telegraf;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 1em;
+          line-height: 1.25em;
+          height: 3.5em;
+          border: none;
+          border: 1.5px solid black;
+          box-sizing: border-box;
+          box-shadow: 10px 10px 0px black;
+          border-radius: 10px;
+          padding: 1em 1.25em;
+          margin: 1.875em 0;
+          text-decoration: none;
+          color: black;
+        }
+
+        .primary-button:active,
+        .passive-button:active {
+          box-shadow: 5px 5px 0px #000000;
+          transform: translateY(4px);
+        }
+
+        .primary-button {
+          background: var(--primary-color);
+        }
+
+        .primary-button:hover {
+          background: var(--primary-color-dark);
+        }
+
+        .passive-button {
+          background: var(--passive-color);
+        }
+
+        .passive-button:hover {
+          background: var(--passive-color-dark);
+        }
+
+        .buttons > .publish-disabled {
+          cursor: default;
+          opacity: 0.4;
+        }
+        #marker-preview {
+          display: flex;
+          flex-direction: column;
+          padding: 1em;
+        }
+
+        .marker {
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 23.75em;
+          width: 23.75em;
+          background: var(--passive-color);
+          border: 1px solid var(--passive-color-dark);
+          box-sizing: border-box;
+          border-radius: 5px;
+          font-family: Telegraf;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 1.25em;
+          line-height: 25px;
+          color: var(--passive-color-dark);
+        }
+
+        .marker img {
+          position: relative;
+          width: 100%;
+          border: 1px solid black;
+        }
+      </style>
+      <div class="buttons">
+        <a href="/public/social.html" id="social" class="primary-button"
+          >Social
+        </a>
+
+        <a href="/public/index.html" id="explore" class="primary-button"
+          >Explore
+        </a>
+      </div>
+    </header>
+    <div class="background">
+      <!-- to be removed on release -->
+      <div class="content">
+        <p class="title">Build SuperSheres</p>
+        <p class="paragraph">
+          SuperCruisr is a development environment for creating SuperShere web
+          experiences. You can create location or marker-based experiences and
+          deploy them straight to web. Using SuperCruisr doesn’t require any
+          knowledge of coding. You can start working on your content now.
+        </p>
+
+        <img
+          class="splashscreen"
+          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fa1f36298-9f74-4b84-b0cd-fb96b98893cc_White%20Clay.png"
+        />
+
+        <p class="lead">Pick your project type</p>
+
+        <div>
+          <label class="radio-container paragraph">
+            Location-based
+            <input
+              id="location"
+              type="radio"
+              name="radio"
+              onclick="radioOnclick(this)"
+            />
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="radio-container paragraph">
+            Marker-based
+            <input
+              id="marker"
+              type="radio"
+              name="radio"
+              onclick="radioOnclick(this)"
+            />
+            <span class="checkmark"></span>
+          </label>
+
+          <a
+            onclick="anchorOnclick(this)"
+            id="start-building"
+            class="primary-button"
+            >Start building</a
+          >
+          <div id="error" class="error" style="visibility: hidden;">
+            Please, select a project type.
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
