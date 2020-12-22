@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <title>St Christopher</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import the webpage's stylesheet -->
+
+    <link rel="stylesheet" href="../../pages/main/main.css" />
+    <link rel="stylesheet" href="../../index.css" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/0735724151.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- import studio-backend api -->
+    <script src="https://raw.githack.com/AR-js-org/studio-backend/master/dist/arjs-studio-backend.min.js"></script>
+
+    <!-- import web components -->
+    <script src="../../components/back-anchor/back-anchor.js"></script>
+
+    <script src="../../components/footer/footer.js"></script>
+    <script src="../../utils/fileHelper.js"></script>
+    <script src="./publish-confirm.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <style>
+        a {
+          display: grid;
+          grid-template-columns: auto auto;
+          justify-content: left;
+          align-content: center;
+          text-decoration: none;
+          height: 5em;
+          width: 12.5em;
+          padding-left: 1.875em;
+        }
+
+        p {
+          font-family: ClobberGroteskW01-Medium;
+          font-style: normal;
+          font-weight: bold;
+          line-height: 1.625em;
+          padding-left: 0.625em;
+          margin-left: 1em;
+          font-size: 1.25em;
+          color: black;
+        }
+
+        .lead {
+          font-family: ClobberGroteskW01-Medium;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 1.75em;
+          line-height: 140%;
+        }
+
+        .buttons > button,
+        .buttons > a {
+          margin-left: 3.125em;
+          cursor: pointer;
+        }
+
+        .primary-button,
+        .passive-button {
+          display: inline-block;
+          font-family: ClobberGroteskW01-Medium;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 1em;
+          line-height: 1.25em;
+          height: 3.5em;
+          border: none;
+          border: 1.5px solid black;
+          box-sizing: border-box;
+          box-shadow: 10px 10px 0px black;
+          border-radius: 10px;
+          padding: 1em 1.25em;
+          margin: 1.875em 0;
+          text-decoration: none;
+          color: black;
+        }
+
+        .primary-button:active,
+        .passive-button:active {
+          box-shadow: 5px 5px 0px #000000;
+          transform: translateY(4px);
+        }
+
+        .primary-button {
+          background: var(--primary-color);
+        }
+
+        .primary-button:hover {
+          background: var(--primary-color-dark);
+        }
+
+        .passive-button {
+          background: var(--passive-color);
+        }
+
+        .passive-button:hover {
+          background: var(--passive-color-dark);
+        }
+
+        .buttons > .publish-disabled {
+          cursor: default;
+          opacity: 0.4;
+        }
+        #marker-preview {
+          display: flex;
+          flex-direction: column;
+          padding: 1em;
+        }
+
+        .marker {
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 23.75em;
+          width: 23.75em;
+          background: var(--passive-color);
+          border: 1px solid var(--passive-color-dark);
+          box-sizing: border-box;
+          border-radius: 5px;
+          font-family: ClobberGroteskW01-Medium;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 1.25em;
+          line-height: 25px;
+          color: var(--passive-color-dark);
+        }
+
+        .marker img {
+          position: relative;
+          width: 100%;
+          border: 1px solid black;
+        }
+      </style>
+      <div class="buttons">
+        <a href="/public/social.html" id="social" class="primary-button"
+          >Social
+        </a>
+
+        <a href="/public/index.html" id="explore" class="primary-button"
+          >Explore
+        </a>
+      </div>
+    </header>
+    <div class="pages-content">
+      <back-anchor assetsUrl="../../assets"></back-anchor>
+
+      <div class="pages-content-container">
+        <div class="pages-content-element">
+          <p class="title">Get your shareable link</p>
+          <p
+            class="all-set paragraph margin-bottom-2rem loader"
+            style="font-size: 1.25em;"
+          >
+            We are all set! We are publishing your AR Experience. Please wait
+            few seconds
+            <span class="loader__dot">.</span><span class="loader__dot">.</span
+            ><span class="loader__dot">.</span>
+          </p>
+
+          <div class="repo-url"></div>
+        </div>
+      </div>
+    </div>
+    <script src="https://beta-supercruisr.neocities.org/assets/js/plugin.js"></script>
+    <script src="https://beta-supercruisr.neocities.org/assets/js/main.js"></script>
+  </body>
+</html>
