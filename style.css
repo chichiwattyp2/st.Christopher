@@ -2,10 +2,13 @@
   font-family: "Telegraf";
   src: url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.eot");
   src: url("fonts/Telegraf-Regular.eot?#iefix") format("embedded-opentype"),
-    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff2") format("woff2"),
-    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff") format("woff"),
+    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff2")
+      format("woff2"),
+    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff")
+      format("woff"),
     url("fonts/Telegraf-Regular.ttf") format("truetype"),
-    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.svg") format("svg");
+    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.svg")
+      format("svg");
 }
 
 font-family: "grifterbold";
