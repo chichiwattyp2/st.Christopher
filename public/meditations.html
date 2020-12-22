@@ -9,17 +9,19 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="easyrtc/easyrtc.js"></script>
-
-    <script src="https://unpkg.com/aframe-play-sound-on-event@1.0.2/dist/aframe-play-sound-on-event.min.js"></script>
+    
+ <script src="https://unpkg.com/aframe-play-sound-on-event@1.0.2/dist/aframe-play-sound-on-event.min.js"></script>
+  
 
     <script src="js/travel-node-component.js"></script>
 
+   
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
     <script src="js/spawn-in-circle.component.js"></script>
-    <script src="entertainment-list.js"></script>
+    <script src="enterprise-list.js"></script>
     <script src="nav.js"></script>
     <link
       rel="stylesheet"
@@ -39,15 +41,16 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+  
+   
     <!-- load external script files -->
-
+   
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <script>
+     <script>
       AFRAME.registerComponent("typer", {
         dependencies: ["text", "sound__typer", "sound__beep"],
 
@@ -149,12 +152,9 @@
     </script>
   </head>
   <body>
-    <div id="preloader">
+     <div id="preloader">
       <div class="loader-logo text-center">
-        <img
-          src="https://beta-supercruisr.neocities.org/assets/white.png"
-          alt=""
-        />
+        <img src="https://beta-supercruisr.neocities.org/assets/white.png" alt="" />
         <p>Loading SuperCruisr</p>
       </div>
     </div>
@@ -163,11 +163,7 @@
 
     <nav>
       <div class="logo">
-        <a href="index.html"
-          ><img
-            src="https://beta-supercruisr.neocities.org/assets/white.png"
-            alt="logo"
-        /></a>
+        <a href="index.html"><img src="https://beta-supercruisr.neocities.org/assets/white.png" alt="logo"/></a>
       </div>
       <div class="toggle-btn">
         <div class="burger-menu">
@@ -184,17 +180,14 @@
           <div class="data">
             <div class="container">
               <div class="loader-image">
-                <img
-                  src="https://beta-supercruisr.neocities.org/assets/blackloader.png"
-                  alt=""
-                />
+                <img src="https://beta-supercruisr.neocities.org/assets/blackloader.png" alt="" />
               </div>
             </div>
           </div>
         </div>
       </div>
     </nav>
-
+  <body>
     <a-scene>
       <a-camera look-controls cursor="rayOrigin: mouse">
         <!--a-entity
@@ -245,7 +238,7 @@
           ></a-image>
           <a-image
             id="mainLogo"
-            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fmenu-logo-w1.png"
+           src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fmenu-logo-w1.png"
             position="0 5.8 0"
             width="4"
             height="2"
@@ -326,7 +319,7 @@
         </a-entity>
       </a-entity>
     </a-scene>
-    <script src="assets/js/plugin.js"></script>
+     <script src="assets/js/plugin.js"></script>
     <script src="assets/js/main.js"></script>
   </body>
 </html>
