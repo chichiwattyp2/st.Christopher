@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="js/animation.js"></script>
+    <link rel="stylesheet" href="assets/css/webvr.css" type="text/css" />
+  </head>
+  <body>
+<div id="startscreen" class="welcome">
+<div class="wlcnt">
+<img alt="Aurora Player™" height="122" width="119" src="https://supercruisr-chris.neocities.org/public/assets/img/Christopher.gif" srcset="https://supercruisr-chris.neocities.org/public/assets/img/Christopher.gif, https://supercruisr-chris.neocities.org/public/assets/img/Christopher.gif">
+<h1 class="hidden">Video Player for VR</h1>
+<p>Play your own videos with atmospheric lighting effects that match the content of the video. And that in this virtual reality room.</p>
+<button id="btnstart">Start Now the Experience</button>
+
+</div>
+</div>
+
+<button id="video-permission-button">Allow VR video</button>
+
+<input id="file" type="file" />
+    <a-scene
+      id="mainscene"
+      debug="false"
+      fog="type: linear; near:20; far:50; color: #111111;"
+      cursor="rayOrigin: mouse"
+    >
+      <a-assets>
+        <img src="assets/play-light.png" id="play" crossorigin="anonymous" />
+        <img src="assets/pause.png" id="pause" crossorigin="anonymous" />
+        <img
+          src="assets/volume-normal.png"
+          id="volume-normal"
+          crossorigin="anonymous"
+        />
+        <img
+          src="assets/volume-mute.png"
+          id="volume-mute"
+          crossorigin="anonymous"
+        />
+        <img
+          src="assets/seek-back.png"
+          id="seek-back"
+          crossorigin="anonymous"
+        />
+        <img
+          src="assets/open-light.png"
+          id="open-light"
+          crossorigin="anonymous"
+        />
+        <img
+          src="assets/settings-light.png"
+          id="open-settings"
+          crossorigin="anonymous"
+        />
+      </a-assets>
+      <a-assets>
+        <img
+          src="assets/white_grid_thin.png"
+          id="grid"
+          crossorigin="anonymous"
+        />
+        <video
+          id="video-src"
+          src="https://cdn.glitch.com/259d28e5-8656-400f-9689-ef722da584ff%2F5.mp4"
+          playsinline
+          webkit-playsinline
+        ></video>
+      </a-assets>
+
+      <a-entity position="0 1.8 0">
+        <a-entity camera look-controls mouse-cursor>
+          <a-cursor
+            fuse="true"
+            timeout="500"
+            color="#F0F0F0"
+            scale="0.6 0.6 0.6"
+          >
+          </a-cursor>
+        </a-entity>
+      </a-entity>
+
+      <a-plane
+        id="flatborder"
+        material="color:black"
+        rotation="0 0 0"
+        height="100"
+        width="100"
+        position="0 5.5 -16.1"
+      ></a-plane>
+
+      <a-sound
+        id="alert-sound"
+        src="src: url(assets/action.wav)"
+        autoplay="false"
+        position="0 0 0"
+      ></a-sound>
+      <a-video
+        id="video-screen"
+        src="#video-src"
+        position="0 5.5 -16"
+        width="16"
+        height="9"
+      ></a-video>
+
+      <a-image
+        id="control-open"
+        width="0.4"
+        height="0.4"
+        src="#open-light"
+        position="-1.6 0.6 -6"
+      ></a-image>
+      <a-image
+        id="control-back"
+        width="0.4"
+        height="0.4"
+        src="#seek-back"
+        position="-0.8 0.6 -6"
+        visible="false"
+        scale="0.85 0.85 0.85"
+      ></a-image>
+      <a-image
+        id="control-play"
+        width="0.4"
+        height="0.4"
+        src="#play"
+        position="0 0.6 -6"
+      ></a-image>
+      <a-image
+        id="control-volume"
+        width="0.4"
+        height="0.4"
+        src="#volume-normal"
+        position="0.8 0.6 -6"
+        visible="false"
+        scale="0.75 0.75 0.75"
+      ></a-image>
+      <a-image
+        id="control-settings"
+        width="0.4"
+        height="0.4"
+        src="#open-settings"
+        position="1.6 0.6 -6"
+        scale="0.75 0.75 0.75"
+      ></a-image>
+
+      <a-entity
+        id="progress-bar"
+        geometry="primitive: plane; width: 4; height: 0.06;"
+        material="transparent: true; visible:false; opacity: 0;"
+        position="0 0.1 -6"
+      >
+        <a-plane
+          id="progress-bar-track"
+          width="4"
+          height="0.06"
+          color="black"
+          position="0 0 0.005"
+          opacity="0.2"
+          visible="false"
+        ></a-plane>
+        <a-plane
+          id="progress-bar-fill"
+          width="0"
+          height="0.06"
+          color="#7198e5"
+          position="-2 0 0.01"
+          visible="false"
+        ></a-plane>
+      </a-entity>
+
+      <a-entity
+        id="settings-panel"
+        geometry="primitive: plane; width: 9; height: 1;"
+        material="transparent: true; visible:false; opacity: 0;"
+        position="1 3.75 -6"
+      >
+        <a-plane
+          id="settings-button1b"
+          material="color:black;"
+          rotation="0 0 0"
+          height="1"
+          width="1"
+          position="-8 -2.5 -6"
+          visible="false"
+        ></a-plane>
+        <a-plane
+          id="settings-button2b"
+          material="color:#111111;"
+          rotation="0 0 0"
+          height="1"
+          width="1"
+          position="-6 -2.5 -6"
+          visible="false"
+        ></a-plane>
+        <a-plane
+          id="settings-button3b"
+          material="color:white;"
+          rotation="0 0 0"
+          height="1"
+          width="1"
+          position="-4 -2.5 -6"
+          visible="false"
+        ></a-plane>
+        <a-plane
+          id="settings-button4b"
+          material="color:purple;"
+          rotation="0 0 0"
+          height="1"
+          width="1"
+          position="-2 -2.5 -6"
+          visible="false"
+        ></a-plane>
+        <a-plane
+          id="settings-button5b"
+          material="color:#DD2C00;"
+          rotation="0 0 0"
+          height="1"
+          width="1"
+          position="0 -2.5 -6"
+          visible="false"
+        ></a-plane>
+        <a-plane
+          id="settings-button6b"
+          material="color:#FDD835;"
+          rotation="0 0 0"
+          height="1"
+          width="1"
+          position="2 -2.5 -6"
+          visible="false"
+        ></a-plane>
+        <a-plane
+          id="settings-button7b"
+          material="color:#01579B;"
+          rotation="0 0 0"
+          height="1"
+          width="1"
+          position="4 -2.5 -6"
+          visible="false"
+        ></a-plane>
+        <a-plane
+          id="settings-button8b"
+          material="color:#1B5E20;"
+          rotation="0 0 0"
+          height="1"
+          width="1"
+          position="6 -2.5 -6"
+          visible="false"
+        ></a-plane>
+      </a-entity>
+
+      <a-entity
+        geometry="primitive: plane; width: 10000; height: 10000;"
+        rotation="-90 270 0"
+        material="src: #grid; repeat: 10000 10000; transparent: true; opacity:0.2;"
+      ></a-entity>
+      <a-sky color="#dbdedb"></a-sky>
+      <a-entity light="color: #FFF; intensity: 1; type: ambient;"></a-entity>
+
+      <a-entity
+        position="8.5 10.9 -15"
+        rotation="0 270 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="right1"
+      ></a-entity>
+      <a-entity
+        position="8.5 8.7 -15"
+        rotation="0 270 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="right2"
+      ></a-entity>
+      <a-entity
+        position="8.5 7.5 -15"
+        rotation="0 270 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="right3"
+      ></a-entity>
+      <a-entity
+        position="8.5 6.3 -15"
+        rotation="0 270 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="right4"
+      ></a-entity>
+      <a-entity
+        position="8.5 5.1 -15"
+        rotation="0 270 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="right5"
+      ></a-entity>
+      <a-entity
+        position="8.5 3.9 -15"
+        rotation="0 270 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="right6"
+      ></a-entity>
+      <a-entity
+        position="8.5 2.7 -15"
+        rotation="0 270 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="right7"
+      ></a-entity>
+      <a-entity
+        position="8.5 1.5 -15"
+        rotation="0 270 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="right8"
+      ></a-entity>
+      <a-entity
+        position="-7.36 10.9 -15"
+        rotation="90 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="top1"
+      ></a-entity>
+      <a-entity
+        position="-5.98 10.9 -15"
+        rotation="90 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="top2"
+      ></a-entity>
+      <a-entity
+        position="-4.36 10.9 -15"
+        rotation="90 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="top3"
+      ></a-entity>
+      <a-entity
+        position="-2.64 10.9 -15"
+        rotation="90 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="top4"
+      ></a-entity>
+      <a-entity
+        position="-0.76 10.9 -15"
+        rotation="90 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="top5"
+      ></a-entity>
+      <a-entity
+        position="0.87 10.9 -15"
+        rotation="90 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="top6"
+      ></a-entity>
+      <a-entity
+        position="2.33 10.9 -15"
+        rotation="90 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="top7"
+      ></a-entity>
+      <a-entity
+        position="3.93 10.9 -15"
+        rotation="90 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="top8"
+      ></a-entity>
+      <a-entity
+        position="5.43 10.9 -15"
+        rotation="90 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="top9"
+      ></a-entity>
+      <a-entity
+        position="7.22 10.9 -15"
+        rotation="90 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="top10"
+      ></a-entity>
+      <a-entity
+        position="-8.5 9.78 -15"
+        rotation="0 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="left1"
+      ></a-entity>
+      <a-entity
+        position="-8.5 8.26 -15"
+        rotation="0 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="left2"
+      ></a-entity>
+      <a-entity
+        position="-8.5 7.039 -15"
+        rotation="0 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="left3"
+      ></a-entity>
+      <a-entity
+        position="-8.5 6.099 -15"
+        rotation="0 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="left4"
+      ></a-entity>
+      <a-entity
+        position="-8.5 4.74 -15"
+        rotation="0 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="left5"
+      ></a-entity>
+      <a-entity
+        position="-8.5 3.56 -15"
+        rotation="0 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="left6"
+      ></a-entity>
+      <a-entity
+        position="-8.5 2.32 -15"
+        rotation="0 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="left7"
+      ></a-entity>
+      <a-entity
+        position="-8.5 1.34 -15"
+        rotation="0 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="left8"
+      ></a-entity>
+      <a-entity
+        position="-7.36 0.88 -15"
+        rotation="270 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="bottom1"
+      ></a-entity>
+      <a-entity
+        position="-5.98 0.88 -15"
+        rotation="270 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="bottom2"
+      ></a-entity>
+      <a-entity
+        position="-4.36 0.88 -15"
+        rotation="270 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="bottom3"
+      ></a-entity>
+      <a-entity
+        position="-2.64 0.88 -15"
+        rotation="270 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="bottom4"
+      ></a-entity>
+      <a-entity
+        position="-0.76 0.88 -15"
+        rotation="270 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="bottom5"
+      ></a-entity>
+      <a-entity
+        position="0.87 0.88 -15"
+        rotation="270 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="bottom6"
+      ></a-entity>
+      <a-entity
+        position="2.33 0.88 -15"
+        rotation="270 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="bottom7"
+      ></a-entity>
+      <a-entity
+        position="3.93 0.88 -15"
+        rotation="270 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="bottom8"
+      ></a-entity>
+      <a-entity
+        position="5.43 0.88 -15"
+        rotation="270 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="bottom9"
+      ></a-entity>
+      <a-entity
+        position="7.22 0.88 -15"
+        rotation="270 90 0"
+        light="penumbra:0;angle:180;intensity:15;type:spot;color:black"
+        id="bottom10"
+      ></a-entity>
+    </a-scene>
+
+    <script src="js/AVideoPlayer.js"></script>
+    <script type="text/javascript">
+      var cursor = document.querySelector("a-cursor");
+
+      /* AVideoPlayer */
+      var videoPlayer = new AVideoPlayer();
+      /* CURSOR */
+      let hideCursor = function() {
+        cursor.removeAttribute("animation__cursorHideLeave");
+        cursor.setAttribute(
+          "animation__cursorHideEnter",
+          "property: scale; from: 0.6 0.6 0.6; to: 0 0 0; dur: 300; easing: easeInQuad;"
+        );
+      };
+      let showCursor = function() {
+        cursor.removeAttribute("animation__cursorHideEnter");
+        cursor.setAttribute(
+          "animation__cursorHideLeave",
+          "property: scale; from: 0 0 0; to: 0.6 0.6 0.6; dur: 300; easing: easeInQuad;"
+        );
+      };
+      document
+        .querySelector("#video-screen")
+        .addEventListener("mouseenter", hideCursor);
+      document
+        .querySelector("#video-screen")
+        .addEventListener("mouseleave", showCursor);
+
+      // Play button action
+      document
+        .querySelector("#control-play")
+        .addEventListener("click", function() {
+          if (videoPlayer.paused) {
+            showCursor();
+          } else {
+            hideCursor();
+          }
+        });
+
+      document
+        .querySelector("#control-open")
+        .addEventListener("click", function() {
+          document.getElementById("file").click();
+        });
+
+      document.addEventListener("DOMContentLoaded", function(event) {
+        document.getElementById("btnstart").addEventListener(
+          "click",
+          function() {
+            document.getElementById("startscreen").style.display = "none";
+          },
+          false
+        );
+
+        /* file open */
+        var video = document.getElementById("video-src");
+        document
+          .getElementById("file")
+          .addEventListener("change", function(evt) {
+            evt.preventDefault();
+            var file = evt.target.files[0];
+            if (file.type.split("/")[0] != "video") {
+              window.alert("Please select a file with a `video/*` mime-type");
+              return false;
+            }
+
+            var url = window.URL.createObjectURL(file);
+            video.src = url;
+
+            video.addEventListener(
+              "progress",
+              function(evt) {
+                console.log(video.duration);
+                video.play();
+                hideCursor();
+              },
+              false
+            );
+
+            video.addEventListener("error", function(err) {
+              console.error(video.error, err);
+              window.alert("Sorry! But something went wrong here :(");
+            });
+          });
+      });
+
+      // open new pages in home screen web app on iOS, not in mobile safari
+      (function(a, b, c) {
+        if (c in b && b[c]) {
+          var d,
+            e = a.location,
+            f = /^(a|html)$/i;
+          a.addEventListener(
+            "click",
+            function(a) {
+              d = a.target;
+              while (!f.test(d.nodeName)) d = d.parentNode;
+              "href" in d &&
+                (d.href.indexOf("http") || ~d.href.indexOf(e.host)) &&
+                (a.preventDefault(), (e.href = d.href));
+            },
+            !1
+          );
+        }
+      })(document, window.navigator, "standalone");
+    </script>
+  </body>
+</html>
