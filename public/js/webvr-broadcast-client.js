@@ -218,10 +218,6 @@ function createBroadcaster(streamId) {
 
   // configure the new broadcaster
   const gltfModel = "#broadcaster";
-  const scale = "0.5 0.5 0.5";
-  const offset = streamCount;
-  const position = offset + " -3 0";
-  const rotation = "0 0 0";
 
   // create the broadcaster element using the given settings
   const parent = document.querySelector("a-scene");
