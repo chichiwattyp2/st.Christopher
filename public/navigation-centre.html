@@ -21,7 +21,7 @@
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
 
     <script src="games-list.js"></script>
-
+    <script src="nav.js"></script>
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
@@ -242,6 +242,10 @@
             </a-entity>
           </a-entity>
         </template>
+        <img
+          id="sky"
+          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fdome.jpeg"
+        />
       </a-assets>
       <a-entity
         id="player"
@@ -256,9 +260,7 @@
         <a-sphere class="head" visible="false" random-color></a-sphere>
       </a-entity>
 
-      <a-entity
-        environment="dressing: none; ground: flat; fog: 0; skyType: none; groundColor: #111;gridColor: #202020; grid: 2x2; groundTexture: none"
-      ></a-entity>
+      <a-sky src="#sky"></a-sky>
 
       <a-entity
         id="catalog"
@@ -580,7 +582,11 @@
               geometry=""
             ></a-plane> </a-image
         ></a-entity>
-        <a-entity id="arrows" position="0 0.3 0.2">
+        <a-entity
+          id="arrows"
+          position="0 6.07074 0.01755"
+          rotation="29.999999999999996 0 0"
+        >
           <a-image
             src="https://cdn.glitch.com/7036ea17-bd25-4354-8908-113fffc09696%2Farrow.png?v=1581554812160"
             id="nextArrow"
