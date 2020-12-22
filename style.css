@@ -18,13 +18,13 @@ font-style: normal;
 
 /* Color Variables */
 :root {
-  --primary-color: #ff7d03;
-  --primary-color-dark: #ff7d03;
+  --primary-color: #ffffff;
+  --primary-color-dark: #fffffff;
   --secondary-color: #fffff;
-  --secondary-color-dark: #fffff0;
+  --secondary-color-dark: #ffffff;
   --passive-color: #ffffff;
-  --passive-color-dark: #f2f2f2;
-  --link-color: #fce005;
+  --passive-color-dark: #ffffff;
+  --link-color: #fffffff;
   --max-z-index: 99999;
 }
 
