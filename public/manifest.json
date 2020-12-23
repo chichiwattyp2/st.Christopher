@@ -1,6 +1,6 @@
 {
-  "short_name": "SuperCruisr",
-  "name": "An authoring platform to build SuperCruisr experiences.",
+  "short_name": "AR.js Studio",
+  "name": "An authoring platform to build Web Augmented Reality experiences.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#1a1a1a;",
-  "background_color": "#1a1a1a;"
+  "theme_color": "#7fb8e3",
+  "background_color": "#ffffff"
 }
