@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+ <title>Lounge-Chat</title>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-sharedspace-component@1.0.1/dist/aframe-sharedspace-component.min.js"></script>
+  <script type="text/javascript" src="chat.js"></script>
+  <link rel="stylesheet" href="chatroom.css"/>
+</head>
+ <body
+     ondragenter="event.stopPropagation(); event.preventDefault();"
+     ondragover="event.stopPropagation(); event.preventDefault();"
+     ondrop="event.stopPropagation(); event.preventDefault(); dodrop(event);">
+ 
+
+<!-- via https://jsbin.com/hiqasek/edit?html,js,output -->
+<script>
+function dodrop(event)
+{
+  var dt = event.dataTransfer;
+  var files = dt.files;
+
+    var fileURL = URL.createObjectURL(files[0]);
+    var videoNode = document.querySelector('video')
+    videoNode.src = fileURL;
+}
+
+</script>
+<script>
+function switchTo360(){
+	if ( document.getElementById("threesixty").checked ){
+		document.querySelector("a-videosphere").setAttribute("visible", true );
+		document.querySelector("a-video").setAttribute("visible", false );
+		document.querySelector("a-sky").setAttribute("visible", false );
+		document.querySelector("#room").setAttribute("visible", false );
+	} else {
+		document.querySelector("a-videosphere").setAttribute("visible", false );
+		document.querySelector("a-video").setAttribute("visible", true );
+		document.querySelector("a-sky").setAttribute("visible", true );
+		document.querySelector("#room").setAttribute("visible", true );
+	}
+}
+  
+function mobileStart(){
+      var videoEl = document.querySelector('#rpo');
+      videoEl.play();
+      var playbutton = document.querySelector('#interface');
+      playbutton.style.display = "none"
+}      
+
+if (AFRAME.utils.device.isMobile()){
+      var playbutton = document.querySelector('#mobilesupport');
+      playbutton.style.display = "block"
+}
+  
+// via https://stackoverflow.com/questions/8885701/play-local-hard-drive-video-file-with-html5-video-tag
+// alt solution https://github.com/Utopiah/vrify
+(function localFileVideoPlayer() {
+	'use strict'
+  var URL = window.URL || window.webkitURL
+  var displayMessage = function (message, isError) {
+    var element = document.querySelector('#message')
+    element.innerHTML = message
+    element.className = isError ? 'error' : 'info'
+  }
+  var playSelectedFile = function (event) {
+    var file = this.files[0]
+    var type = file.type
+    var videoNode = document.querySelector('video')
+    var canPlay = videoNode.canPlayType(type)
+    if (canPlay === '') canPlay = 'no'
+    var message = 'Can play type "' + type + '": ' + canPlay
+    var isError = canPlay === 'no'
+    displayMessage(message, isError)
+
+    if (isError) {
+      return
+    }
+
+    var fileURL = URL.createObjectURL(file)
+    videoNode.src = fileURL
+  }
+  var inputNode = document.querySelector('input')
+  inputNode.addEventListener('change', playSelectedFile, false)
+})()
+
+// load via URL, works locally using http-serv --cors in the folder of your videos
+AFRAME.registerComponent('src-via-url', {
+  init: function () {
+    var src = AFRAME.utils.getUrlParameter("src")
+    if (src){
+      var videoEl = this.el.getAttribute("src")
+      document.querySelector(videoEl).setAttribute("src", src)
+    }
+  }
+})
+AFRAME.registerComponent('hide-ui-vr', {
+  init: function () {
+	function hideUI(){
+		document.querySelector("#UI").style.display = "none";
+	}
+	AFRAME.scenes[0].addEventListener('enter-vr', hideUI);
+  }
+});
+
+// seems to have no effect
+window.setTimeout(function(){
+	window.addEventListener("drop", function( event ) {
+	      // prevent default action (open as link for some elements)
+	      event.stopPropagation();
+	      event.preventDefault();
+	      alert(event);
+	  }, false);
+}, 5000);
+</script>  
+  <a class="hide" href="#">Hide</a>
+  <section class="instructions">
+    <h1>SuperCruisr Chat Lounge</h1>
+    <p>
+    In this room you can drag and drop a video from you desktop and it will play on the TV screen.<br>
+      Grant this site permission to access your microphone and share the following link  with your friends (or open it in another browser/tab). Wait for a friend to start chatting.
+    </p>
+    <span class="link"></span>
+    <a class="move" href="./">Move to another room.</a>
+  </section>
+  <a-scene embedded
+   vr-mode-ui="enabled: true"
+        loading-screen="backgroundColor: white">
+    
+         <a-assets>
+      <img src="assets/flare.jpg" alt="Test Lensflare Asset" id="flare-asset">
+      <img src="assets/flare2.jpg" alt="Test Lensflare Asset 2" id="flare-asset-2">
+      <img src="assets/flare3.jpg" alt="Test Lensflare Asset 3" id="flare-asset-3">
+
+     <a-mixin id="me" look-controls wasd-controls share="position, rotation"></a-mixin>
+ <video loop autoplay="true" src="" id="rpo" ></video>
+
+          <img
+            id="dawn"
+            crossorigin="anonymous"
+            src="https://cdn.glitch.com/9f5d1b92-a581-4134-8864-9bd98ff8ed97%2Fdawn.jpeg"
+          />
+
+          <a-asset-item
+            id="lounge"
+            src="assets/lounge.glb"
+          ></a-asset-item>
+       
+          <!-- Define reusable 'Ground' Mixin Entity-->
+          <!-- Ground plane to detect gaze -->
+        </a-assets>
+<a-video src-via-url="" src="#rpo" width="1.6" rotation="0 90 0" position="-14.18142 2.5063 8.29915" share="" material="" geometry="" scale="3 3 3"></a-video>
+    <a-entity sharedspace="audio: true; hold: true" avatars>
+ 
+      <!-- Room -->
+      <a-sky src="#dawn"></a-sky>
+<a-gltf-model src="#lounge" position="-5.18905 0.02297 13.0856" scale="0.015 0.015 0.015" rotation="" gltf-model="assets/lounge.glb">
+        </a-gltf-model>
+<a-entity light="type: hemisphere; color: #33C; groundColor: #fcba03; intensity: 2"></a-entity>
+
+      <!-- Table -->
+      <a-plane class="table"
+                  position="0 0.8 0"
+                  width="1"
+                  height="1"
+                  rotation="90 0 0"
+                 material="side: double; color: #eaf2f9; transparent: true; opacity: 0">
+                 
+      </a-plane>
+ 
+    </a-entity>
+  </a-scene>
+  <template>
+  <a-sphere color="yellow" radius="0.5"></a-sphere>
+  
+      <!--
+      Anime Face Model Stocking(https://sketchfab.com/models/d049b6a85d204057b170ef9dbc851200) by stocking(https://sketchfab.com/stocking) is licensed under CC Attribution(http://creativecommons.org/licenses/by/4.0/)
+      -->
+   
+  </template>
+  <script>
+    var hideButton = document.querySelector('.hide');
+    var instructions = document.querySelector('.instructions');
+    hideButton.onclick = function (evt) {
+      instructions.classList.toggle('hidden');
+      this.textContent = instructions.classList.contains('hidden') ? 'Show': 'Hide';
+      return false;
+    };
+    
+    var scene = document.querySelector('a-scene');
+    var room = document.querySelector('[sharedspace]');
+    var table = document.querySelector('.table');
+
+    // Make the avatar to look at the center of the table.
+    room.addEventListener('avataradded', function onAdded(evt) {
+      
+      // Fixing should happen after the avatar fully loads.
+      // Only then, it is safe to alter the avatar’s components.
+      var avatar = evt.detail.avatar;
+      if (!avatar.hasLoaded) {
+        avatar.addEventListener('loaded', onAdded.bind(null, evt));
+        return;
+      }
+      
+      var tablePosition = table.getAttribute('position');
+      var avatarY = avatar.getAttribute('position').y;
+      avatar.object3D.lookAt(new THREE.Vector3(
+        tablePosition.x, avatarY, tablePosition.z
+      ));
+
+      // It is not enough to modify the underlaying Three object. It is
+      // neccessary to use the A-Frame API for the sharedspace component to
+      // be able of serialize the rotation correctly.
+      var radToDeg = THREE.Math.radToDeg;
+      var rotation = avatar.object3D.rotation;
+      rotation.y += Math.PI;
+      
+      avatar.setAttribute('rotation', {
+        x: radToDeg(rotation.x),
+        y: radToDeg(rotation.y),
+        z: radToDeg(rotation.z)
+      });
+      
+    });
+
+    // Create a new room or join one.
+    let roomName = window.location.search.substr(1);
+    if (!roomName) {
+      roomName = 'room-' + Date.now();
+      history.pushState({}, '', window.location + `?${roomName}`);
+    }
+    else {
+      hideButton.click();
+    }
+    connect();
+
+    function connect() {
+      if (!scene.hasLoaded) {
+        scene.addEventListener('loaded', connect);
+        return;
+      }
+      room.setAttribute('sharedspace', { room: roomName, hold: false });
+    }
+
+    // Select link on click.
+    var link = document.querySelector('.link');
+    link.textContent = window.location.href;
+    link.onclick = function () {
+      var range = document.createRange();
+      range.selectNode(link);
+      var selection = document.getSelection();
+      selection.empty();
+      selection.addRange(range);
+    };
+
+  </script>
+</body>
+</html>

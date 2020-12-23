@@ -10,7 +10,7 @@ function encodeHtml(str) {
 
 $(function() {
   var sheetUrl =
-    "https://spreadsheets.google.com/feeds/cells/1fy-ZztZlhwgfz1wH8YGji2zuiiEfV88XyCRBDzLB1AA/1/public/full?alt=json";
+    "https://spreadsheets.google.com/feeds/cells/1fy-ZztZlhwgfz1wH8YGji2zuiiEfV88XyCRBDzLB1AA/4/public/full?alt=json";
 
   $.getJSON(sheetUrl, function(data) {
     const entries = data.feed.entry;
@@ -61,10 +61,10 @@ $(function() {
                 event-set__leave="_event: mouseleave; _target: #highlight-${h}; visible: false">
           <a-entity
             geometry="primitive: plane; width: 2; height: .2"
-            color="#FF926B" material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+            material="color: #111"
             text="align:center; value: ${listing.title}"
             position="0 -.6 0"></a-entity>
-         <a-plane id="highlight-${h}" width="2.05" height="1.25" color="#FF926B" material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true" position="0 -0.1 -0.01" visible="false"></a-plane>
+         <a-plane id="highlight-${h}" width="2.05" height="1.25" material="shader: flat; color: white;" position="0 -0.1 -0.01" visible="false"></a-plane>
         </a-image>`);
       i++;
       h++;

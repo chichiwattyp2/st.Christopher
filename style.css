@@ -2,10 +2,13 @@
   font-family: "Telegraf";
   src: url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.eot");
   src: url("fonts/Telegraf-Regular.eot?#iefix") format("embedded-opentype"),
-    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff2") format("woff2"),
-    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff") format("woff"),
+    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff2")
+      format("woff2"),
+    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff")
+      format("woff"),
     url("fonts/Telegraf-Regular.ttf") format("truetype"),
-    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.svg") format("svg");
+    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.svg")
+      format("svg");
 }
 
 font-family: "grifterbold";
@@ -18,13 +21,13 @@ font-style: normal;
 
 /* Color Variables */
 :root {
-  --primary-color: #ff7d03;
-  --primary-color-dark: #ff7d03;
+  --primary-color: #ffffff;
+  --primary-color-dark: #fffffff;
   --secondary-color: #fffff;
-  --secondary-color-dark: #fffff0;
+  --secondary-color-dark: #ffffff;
   --passive-color: #ffffff;
-  --passive-color-dark: #f2f2f2;
-  --link-color: #fce005;
+  --passive-color-dark: #ffffff;
+  --link-color: #fffffff;
   --max-z-index: 99999;
 }
 

@@ -93,12 +93,12 @@ color: #ffffff;
     </p>
 
     <p class="paragraph">
-      publish your SuperShere on SuperCruisr or download the package containing all files and generated code to save it locally.
+      publish your Web App on Github or download the package containing all files and generated code to save it locally.
     </p>
 
     <div class="buttons">
       <button id="github-publish" class="primary-button publish-disabled">
-        Publish on SuperCruisr
+        Publish on Github
       </button>
 
       <button id="zip-publish" disabled class="passive-button publish-disabled">

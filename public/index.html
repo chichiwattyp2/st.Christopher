@@ -16,20 +16,6 @@
     <script src="js/travel-node-component.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
-    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-    <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
-
-    <script src="games-list.js"></script>
-    <script src="nav.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-      crossorigin="anonymous"
-    />
-
-    <!-- Plugin CSS -->
     <link rel="stylesheet" href="assets/css/plugin.css" />
 
     <!-- Main CSS -->
@@ -48,6 +34,31 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
+    <link rel="stylesheet" href="assets/css/plugin.css" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="assets/css/dark.css" />
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- load external script files -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="js/nav.js"></script>
+
+    <!-- Plugin CSS -->
+
     <script>
       AFRAME.registerComponent("typer", {
         dependencies: ["text", "sound__typer", "sound__beep"],
@@ -164,7 +175,7 @@
 
     <nav>
       <div class="logo">
-        <a href="index.html"
+        <a href="/public/navigation-centre.html"
           ><img
             src="https://beta-supercruisr.neocities.org/assets/white.png"
             alt="logo"
@@ -202,483 +213,79 @@
       audio: true;
       debug: true"
     >
-      
-
-      
-
-      <!-- <a-entity id="catalog" scale=".2 .2 .2" position="0 1.1 -1.05">
-        <a-entity
-          class="container"
-          id="container"
-          position="-3.15 4 0"
-        ></a-entity>
-        <a-entity id="arrows" position="0 .3 .2">
-          <a-image
-            src="https://cdn.glitch.com/7036ea17-bd25-4354-8908-113fffc09696%2Farrow.png?v=1581554812160"
-            id="nextArrow"
-            position="1 0 0"
-            width=".4"
-            height=".25"
-            rotation="0 0 90"
-            clickable
-            onclick="goNext();"
-          ></a-image>
-
-          <a-text
-            id="pageCounter"
-            position="-.1 0 0"
-            value="1"
-            align="center"
-          ></a-text>
-          <a-text
-            id="pageTotal"
-            position=".08 0 0"
-            value="/2"
-            align="center"
-          ></a-text>
-          <a-image
-            src="https://cdn.glitch.com/7036ea17-bd25-4354-8908-113fffc09696%2Farrow.png?v=1581554812160"
-            id="backArrow"
-            position="-1 0 0"
-            width=".4"
-            height=".25"
-            rotation="0 0 -90"
-            clickable
-            onclick="goBack();"
-          ></a-image>
-        </a-entity>
-
-        <a-entity id="menu" position="-3.06 4.98 0" scale=".35 .35 .35">
-          <a-entity
-            link="href: index.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
-            material="color: #606060"
-            text="align:center; value:Home; width:10;"
-            position="0 0 0"
-          >
-          </a-entity>
-          <a-entity
-            link="href: chatrooms.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
-            material="color: #111"
-            text="align:center; value: Chatrooms; width:10;"
-            position="3.5 0 0"
-          >
-          </a-entity>
-          <a-entity
-            link="href: meditations.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
-            material="color: #111"
-            text="align:center; value: Meditations; width:10;"
-            position="7 0 0"
-          >
-          </a-entity>
-          <a-entity
-            link="href: webar.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
-            material="color: #111"
-            text="align:center; value: WebAR; width:10;"
-            position="10.5 0 0"
-          >
-          </a-entity>
-          <a-entity
-            link="href: music.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
-            material="color: #111"
-            text="align:center; value: Music; width:10;"
-            position="14 0 0"
-          >
-          </a-entity>
-          <a-entity
-            link="href: broadcasting.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
-            material="color: #111"
-            text="align:center; value: Broadcasting; width:10;"
-            position="17.5 0 0"
-          >
-          </a-entity>
-        </a-entity>
-      </a-entity> -->
-      <!--<a-entity
-        geometry="primitive: plane; height: 10; width: auto"
-        material="opacity: 0;"
-        typer="message: This is a web based platform that can be accessed from any browser on any device.\n\nClick on a tab to start exploring.\n\n; on: click;"
-        text="value: Welcome to my XR Browser.\n\n 1 Unread Message. Click to read.; font: roboto; align: center; color: white; width: 2.8; zOffset: 0.01; letterSpacing: -1; tabSize: 1; side: double;"
-        position="0 1.1 1"
-        sound__typer="src: #typing; autoplay: false; loop: true;"
-        sound__beep="src: #beep; autoplay: false; loop: false;"
-        rotation="-15 0 0"
-      ></a-entity>-->
-
-      <!-- The rig is an object that the camera is sitting on.
-    Move and rotate the rig to move the camera. -->
-
-      <a-entity id="rig" position="0 1.4 5" rotation="0 0 0">
-        <a-entity id="cam" camera look-controls></a-entity>
-      </a-entity>
-
-      <!--  THIS IS WHERE ALL OF THE OBJECTS AND TEXT GO     -->
-
       <a-assets>
         <audio
           id="click-sound"
           crossorigin="anonymous"
           src="https://cdn.glitch.com/22ec690f-3d8c-49a9-b10a-903a96c741e5%2Fsound.mp3"
         ></audio>
-        <img
-          id="dawn"
-          crossorigin="anonymous"
-          src="https://cdn.glitch.com/9f5d1b92-a581-4134-8864-9bd98ff8ed97%2Fdawn.jpeg"
-        />
-
-        <a-asset-item
-          id="roomer"
-          src="https://cdn.glitch.com/9f5d1b92-a581-4134-8864-9bd98ff8ed97%2Fglassedit.glb"
-        ></a-asset-item>
-        <video
-          id="VR_VIDEO"
-          loop="true"
-          src="https://cdn.glitch.com/a0f896a4-4e28-47a9-b792-0307f9c0c167%2F3.mp4"
-        ></video>
+        <!-- Avatar -->
+        <template id="avatar-template">
+          <a-entity class="avatar" networked-audio-source>
+            <a-sphere
+              class="head"
+              color="#5985ff"
+              scale="0.45 0.5 0.4"
+              random-color
+            ></a-sphere>
+            <a-entity class="face" position="0 0.05 0">
+              <a-sphere
+                class="eye"
+                color="#efefef"
+                position="0.16 0.1 -0.35"
+                scale="0.12 0.12 0.12"
+              >
+                <a-sphere
+                  class="pupil"
+                  color="#000"
+                  position="0 0 -1"
+                  scale="0.2 0.2 0.2"
+                ></a-sphere>
+              </a-sphere>
+              <a-sphere
+                class="eye"
+                color="#efefef"
+                position="-0.16 0.1 -0.35"
+                scale="0.12 0.12 0.12"
+              >
+                <a-sphere
+                  class="pupil"
+                  color="#000"
+                  position="0 0 -1"
+                  scale="0.2 0.2 0.2"
+                ></a-sphere>
+              </a-sphere>
+            </a-entity>
+          </a-entity>
+        </template>
       </a-assets>
-
-      <a-sky src="#dawn"></a-sky>
-      <a-video
-        rotation=""
-        position="0 1.4919 1.87607"
-        width="1.920"
-        height="1.080"
-        src="#VR_VIDEO"
-        material=""
-        geometry=""
-      ></a-video>
-
-      <a-gltf-model
-        src="#roomer"
-        position="11.92622 -4.51514 -14.44525"
-        scale="0.55 0.55 0.55"
-        rotation="0 210.00000000000003 0"
-        gltf-model="https://cdn.glitch.com/9f5d1b92-a581-4134-8864-9bd98ff8ed97%2Fglassedit.glb"
+      <a-entity
+        id="player"
+        networked="template:#avatar-template;attachTemplateToLocal:false;"
+        camera
+        spawn-in-circle="radius:3;"
+        position="0 1.9 0"
+        wasd-controls
+        look-controls
       >
-      </a-gltf-model>
-      <a-image
-        position="0 1.5 2.1"
-        rotation="0 0 0"
-        width="1.8"
-        height="1.8"
-        material="src: https://cdn.glitch.com/a0f896a4-4e28-47a9-b792-0307f9c0c167%2F1.png?v=1592181279995; side: front;"
-      >
-      </a-image>
-      <a-plane
-        sound="on: click; src: #click-sound"
-        position="0 1.5 1.92276"
-        rotation=""
-        width="4"
-        height="2"
-        material="color: #fff; side: front;"
-        shadow=""
-        geometry=""
-      >
-      </a-plane>
-      <a-icosahedron
-        position="-1.13698 1.11641 -2"
-        id="1"
-        color="#FF926B"
-        radius="0.8"
-        material=""
-        geometry=""
-        rotation="0 0 0"
-        animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
-      ></a-icosahedron>
-      <a-box
-        material="color: #fff transparent: true; opacity: 0.3"
-        depth="1.9"
-        height="1.9"
-        width="1.9"
-        position="-0.98642 1.11641 -2"
-        geometry=""
-      ></a-box>
-      <a-image
-        position="-1 1 -1"
-        rotation="0 0 0"
-        width="1.8"
-        height="1.8"
-        material="src: https://cdn.glitch.com/a0f896a4-4e28-47a9-b792-0307f9c0c167%2F2.png?v=1592181280507; side: front;"
-        shadow
-      >
-      </a-image>
+        <a-cursor></a-cursor>
+        <a-sphere class="head" visible="false" random-color></a-sphere>
+      </a-entity>
 
-      <a-image
-        position="0 1 -2"
-        rotation="0 90 0"
-        width="1.8"
-        height="1.8"
-        material="src: https://cdn.glitch.com/a0f896a4-4e28-47a9-b792-0307f9c0c167%2F3.png?v=1592181280685 side: front;"
-        shadow
-      >
-      </a-image>
+      <a-entity
+        environment="dressing: none; ground: flat; fog: 0; skyType: none; groundColor: #111;gridColor: #202020; grid: 2x2; groundTexture: none"
+      ></a-entity>
 
-      <a-image
-        id="FIGHT-SIM"
-        position="-1 1 -3"
-        rotation="0 180 0"
-        width="1.8"
-        height="1.8"
-        material="src: https://cdn.glitch.com/a0f896a4-4e28-47a9-b792-0307f9c0c167%2F4.png?v=1592181282672; side: front;"
-        shadow
-      >
-      </a-image>
-      <a-icosahedron
-        position="-10.44552 1.11641 -2"
-        id="2"
-        color="#FF926B"
-        radius="0.8"
-        material=""
-        geometry=""
-        rotation="0 0 0"
-        animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
-      ></a-icosahedron>
-      <a-box
-        material="color: #fff transparent: true; opacity: 0.3"
-        depth="1.9"
-        height="1.9"
-        width="1.9"
-        position="-10.51164 1.06567 -1.99779"
-        geometry=""
-      ></a-box>
-      <a-image
-        id="MANY-CAMERAS"
-        position="-2 1 -2"
-        rotation="0 270 0"
-        width="1.8"
-        height="1.8"
-        material="src: https://cdn.glitch.com/a0f896a4-4e28-47a9-b792-0307f9c0c167%2F5.png?v=1592181281348; side: front;"
-        shadow
-      >
-      </a-image>
-
-      <!-- THIS IS A NEW CUBE -->
-
-      <a-image
-        position="-10.5 1 -1"
-        rotation="0 0 0"
-        width="1.8"
-        height="1.8"
-        material="src: https://cdn.glitch.com/a0f896a4-4e28-47a9-b792-0307f9c0c167%2F6.png?v=1592181281482; side: front;"
-        shadow
-      >
-      </a-image>
-
-      <a-image
-        position="-9.5 1 -2"
-        rotation="0 90 0"
-        width="1.8"
-        height="1.8"
-        material="src: https://cdn.glitch.com/a0f896a4-4e28-47a9-b792-0307f9c0c167%2F7.png?v=1592181283530; side: front;"
-        shadow
-      >
-      </a-image>
-
-      <a-image
-        position="-10.5 1 -3"
-        rotation="0 180 0"
-        width="1.8"
-        height="1.8"
-        material="src: https://cdn.glitch.com/a0f896a4-4e28-47a9-b792-0307f9c0c167%2F8.png?v=1592181282106; side: front;"
-        shadow
-      >
-      </a-image>
-
-      <a-image
-        position="-11.5 1 -2"
-        rotation="0 270 0"
-        width="1.8"
-        height="1.8"
-        material="src: https://cdn.glitch.com/a0f896a4-4e28-47a9-b792-0307f9c0c167%2F5.png; side: front;"
-        shadow
-      >
-      </a-image>
-
-      <!--  The script is JavaScript code that controls the HTML code -->
-      <script>
-        // This sets rig as a variable. It uses the id of the entity with a # before the id name
-        var rig = document.querySelector("#rig");
-        var cam = document.querySelector("#cam");
-        // TODO: Make a variablefor the camera element
-        var count = 0;
-        var dragged = false;
-
-        // This listens for any keydown event, then runs the function
-        window.addEventListener("mousedown", function(e) {
-          dragged = false;
-        });
-        window.addEventListener("mousemove", function(e) {
-          dragged = true;
-        });
-        window.addEventListener("mouseup", function(e) {
-          if (dragged == false) {
-            move();
-          }
-        });
-        var vid = document.getElementById("VR_VIDEO");
-        var a = 0;
-        function move() {
-          // e.g. space key
-          count = count + 1;
-          a = a + 1;
-          if (count == 1) {
-            vid.play();
-            // Move the rig
-            rig.setAttribute("animation__p" + a, {
-              property: "position",
-              to: "0 1.4 1",
-              delay: 0,
-              dur: 1000
-            });
-            // Rotate the rig
-            rig.setAttribute("animation__r" + a, {
-              property: "rotation",
-              to: "0 180 0",
-              delay: 0,
-              dur: 1000
-            });
-          }
-
-          if (count == 2) {
-            // Move the rig
-            rig.setAttribute("animation__p" + a, {
-              property: "position",
-              to: "-1 1.4 1.5",
-              delay: 0,
-              dur: 1000
-            });
-            // Rotate the rig
-            rig.setAttribute("animation__r" + a, {
-              property: "rotation",
-              to: "0 0 0",
-              delay: 0,
-              dur: 1000
-            });
-          } // end if count == 1
-
-          if (count == 3) {
-            // Move the rig
-            rig.setAttribute("animation__p" + a, {
-              property: "position",
-              to: "2.5 1.6 -2",
-              delay: 0,
-              dur: 1000
-            });
-            // Rotate the rig
-            rig.setAttribute("animation__r" + a, {
-              property: "rotation",
-              to: "0 90 0",
-              delay: 0,
-              dur: 1000
-            });
-          } // end if count == 1
-
-          if (count == 4) {
-            // Move the rig
-            rig.setAttribute("animation__p" + a, {
-              property: "position",
-              to: "-1 1.4 -5",
-              delay: 0,
-              dur: 1000
-            });
-            // Rotate the rig
-            rig.setAttribute("animation__r" + a, {
-              property: "rotation",
-              to: "0 180 0",
-              delay: 0,
-              dur: 1000
-            });
-          } // end if count == 2
-
-          if (count == 5) {
-            // Move the rig
-            rig.setAttribute("animation__p" + a, {
-              property: "position",
-              to: "-4.5 1.6 -2",
-              delay: 0,
-              dur: 1000
-            });
-            // Rotate the rig
-            rig.setAttribute("animation__r" + a, {
-              property: "rotation",
-              to: "0 270 0",
-              delay: 0,
-              dur: 1000
-            });
-          }
-          if (count == 6) {
-            // Move the rig
-            rig.setAttribute("animation__p" + a, {
-              property: "position",
-              to: "-10.5 1.6 1.5",
-              delay: 0,
-              dur: 1000
-            });
-            // Rotate the rig
-            rig.setAttribute("animation__r" + a, {
-              property: "rotation",
-              to: "0 0 0",
-              delay: 0,
-              dur: 1000
-            });
-          } // end if count == 4
-          if (count == 7) {
-            // Move the rig
-            rig.setAttribute("animation__p" + a, {
-              property: "position",
-              to: "-7 1.6 -2",
-              delay: 0,
-              dur: 1000
-            });
-            // Rotate the rig
-            rig.setAttribute("animation__r" + a, {
-              property: "rotation",
-              to: "0 90 0",
-              delay: 0,
-              dur: 1000
-            });
-          } // end if count == 5
-          if (count == 8) {
-            // Move the rig
-            rig.setAttribute("animation__p" + a, {
-              property: "position",
-              to: "-10.5 1.6 -5.5",
-              delay: 0,
-              dur: 1000
-            });
-            // Rotate the rig
-            rig.setAttribute("animation__r" + a, {
-              property: "rotation",
-              to: "0 180 0",
-              delay: 0,
-              dur: 1000
-            });
-          } // end
-          if (count == 9) {
-            // Move the rig
-            rig.setAttribute("animation__p" + a, {
-              property: "position",
-              to: "-14 1.6 -2",
-              delay: 0,
-              dur: 1000
-            });
-            // Rotate the rig
-            rig.setAttribute("animation__r" + a, {
-              property: "rotation",
-              to: "0 270 0",
-              delay: 0,
-              dur: 1000
-            });
-            console.log(count);
-            count = 0;
-          } // end
-        } // end move
-      </script>
+      <a-entity
+        geometry="primitive: plane; height: 10; width: auto"
+        material="opacity: 0;"
+        typer="message: This is a web based platform that can be accessed from any browser on any device.\n\nClick on the logo in the top left corner to start exploring.\n\n; on: click;"
+        text="value: Welcome to the site.\n\n Click to read.; font: roboto; align: center; color: white; width: 2.8; zOffset: 0.01; letterSpacing: -1; tabSize: 1; side: double;"
+        position="0 1.4 -2"
+        sound__typer="src: #typing; autoplay: false; loop: true;"
+        sound__beep="src: #beep; autoplay: false; loop: false;"
+        rotation="-15 0 0"
+      ></a-entity>
     </a-scene>
     <script>
       // On mobile remove elements that are resource heavy
