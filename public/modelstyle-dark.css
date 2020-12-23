@@ -1,0 +1,127 @@
+@font-face {
+  font-family: "Telegraf";
+  src: url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.eot");
+  src: url("fonts/Telegraf-Regular.eot?#iefix") format("embedded-opentype"),
+    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff2")
+      format("woff2"),
+    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff")
+      format("woff"),
+    url("fonts/Telegraf-Regular.ttf") format("truetype"),
+    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.svg")
+      format("svg");
+}
+
+font-family: "grifterbold";
+src: url("https://beta-supercruisr.neocities.org/assets/css/grifterbold-webfont.woff2")
+    format("woff2"),
+  url("https://beta-supercruisr.neocities.org/assets/css/grifterbold-webfont.woff")
+    format("woff");
+font-weight: normal;
+font-style: normal;
+
+/* Color Variables */
+:root {
+  --primary-color: #ffffff;
+  --primary-color-dark: #fffffff;
+  --secondary-color: #fffff;
+  --secondary-color-dark: #ffffff;
+  --passive-color: #ffffff;
+  --passive-color-dark: #ffffff;
+  --link-color: #fffffff;
+  --max-z-index: 99999;
+}
+
+/* Typography */
+.title {
+  font-family: Telegraf;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 3em;
+}
+
+.lead {
+  font-family: Telegraf;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.75em;
+  line-height: 140%;
+}
+
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  color: #fff;
+  background: #1e272c
+  font-family: "Telegraf";
+  font-style: normal;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+header {
+  padding: 60px;
+  text-align: center;
+  font-size: 30px;
+}
+
+a {
+  color: #fff;
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+label {
+  display: inline-block;
+  font-size: 16px;
+  width: 55px;
+  height: 12px;
+}
+
+input {
+  vertical-align: middle;
+}
+
+.number {
+  border: 0;
+  background: transparent;
+  font-size: 16px;
+  width: 32px;
+  outline: none;
+}
+
+select {
+  font-size: 10px;
+}
+
+model-viewer {
+  width: 100%;
+  height: 100%;
+}
+
+#instructions {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+}
+
+#controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+/* Nokia 8810 */
+
+@media screen and (max-width: 320px) {
+  #instructions {
+    display: none;
+  }
+  #controls {
+    display: none;
+  }
+}

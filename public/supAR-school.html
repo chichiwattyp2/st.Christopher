@@ -1,0 +1,214 @@
+<html>
+  <head>
+    <!-- container for meta tag information -->
+    <title>SuperSchool- AR Teacher</title>
+
+    <meta charset="UTF-8" />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="assets/css/plugin.css" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="assets/css/dark.css" />
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="js/AgoraRTCSDK-3.0.2.js" type="text/javascript"></script>
+    <script src="js/agora-rtm-sdk-1.2.2.js" type="text/javascript"></script>
+
+    <!-- load external script files -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
+    />
+    <style>
+      video {
+        max-width: calc(50% - 100px);
+        margin: 0 50px;
+        box-sizing: border-box;
+        border-radius: 2px;
+        padding: 0;
+        box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px,
+          rgba(156, 172, 172, 0.2) 0px 4px 4px,
+          rgba(156, 172, 172, 0.2) 0px 8px 8px,
+          rgba(156, 172, 172, 0.2) 0px 16px 16px,
+          rgba(156, 172, 172, 0.2) 0px 32px 32px,
+          rgba(156, 172, 172, 0.2) 0px 64px 64px;
+      }
+    </style>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-play-sound-on-event@1.0.2/dist/aframe-play-sound-on-event.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+
+    <script src="travel-node-component.js"></script>
+
+    <script src="js/target.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+
+    <script src="https://unpkg.com/aframe-lensflare-component/dist/aframe-lensflare-component.min.js"></script>
+  </head>
+  <!--BODYBODYBODYBODY -->
+  <body>
+    <div id="preloader">
+      <div class="loader-logo text-center">
+        <img src="assets/white.png" alt="" />
+        <p>Loading SuperCruisr</p>
+      </div>
+    </div>
+
+    <!-- Start Header -->
+
+    <nav>
+      <div class="logo">
+        <a href="index.html"
+          ><img
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fswellss.png"
+            alt="logo"
+        /></a>
+      </div>
+      <div class="toggle-btn">
+        <div class="burger-menu">
+          <span class="one"></span>
+          <span class="two"></span>
+          <span class="tre"></span>
+        </div>
+      </div>
+
+      <div class="bg-nav"></div>
+
+      <div class="manu-container">
+        <div class="menu">
+          <div class="data">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="links text-center text-lg-left">
+                    <ul>
+                      <li>
+                        <a class="menu-link active" href="ar.html"
+                          >Build Your Own AR Website</a
+                        >
+                      </li>
+                      <li>
+                        <a class="menu-link" href="/navigation-centre.html"
+                          >Explore my XR Browser</a
+                        >
+                      </li>
+                      <li>
+                        <a class="menu-link" href="/models.html"
+                          >3D Model Viewer</a
+                        >
+                      </li>
+
+                      <li>
+                        <a class="menu-link" href="#" data-scroll-nav="7"
+                          >Contact</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!--ENDENDENDNEND -->
+
+    <a-scene
+      antialias="true"
+      vr-mode-ui="enabled: true"
+      loading-screen="backgroundColor: #212121"
+    >
+      <a-assets>
+        <img
+          src="assets/flare.jpg"
+          alt="Test Lensflare Asset"
+          id="flare-asset"
+        />
+        <img
+          src="assets/flare2.jpg"
+          alt="Test Lensflare Asset 2"
+          id="flare-asset-2"
+        />
+        <img
+          src="assets/flare3.jpg"
+          alt="Test Lensflare Asset 3"
+          id="flare-asset-3"
+        />
+        <a-asset-item
+          id="broadcaster"
+          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fbroadcaster.glb"
+        ></a-asset-item>
+
+        <img
+          id="dawn"
+          crossorigin="anonymous"
+          src="https://cdn.glitch.com/9f5d1b92-a581-4134-8864-9bd98ff8ed97%2Fdawn.jpeg"
+        />
+
+        <!-- Define reusable 'Ground' Mixin Entity-->
+        <!-- Ground plane to detect gaze -->
+      </a-assets>
+
+      <!-- Room -->
+      <a-sky src="#dawn"></a-sky>
+
+      <a-gltf-model
+        src="#classroom"
+        position="-13.22689 -4.00157 17.14774"
+        scale="0.5 0.5 0.5"
+        rotation="0 -90 0"
+        gltf-model="https://cdn.glitch.com/e88aa858-1935-41a4-bf2e-99d33a0d30d4%2Fclassroom.glb"
+      ></a-gltf-model>
+
+      <a-entity
+        light="type: hemisphere; color: #33C; groundColor: #fcba03; intensity: 2"
+      ></a-entity>
+
+      <a-box
+        id="box"
+        position="-1.62896 0.47828 -7.71169"
+        material=""
+        geometry=""
+      ></a-box>
+      <a-plane
+        color="goldenrod"
+        width="50"
+        height="50"
+        depth="50"
+        position="0 -5 0"
+        rotation="-90 0 0"
+      ></a-plane>
+
+      <a-entity
+        position="0 1.9 0"
+        camera
+        look-controls
+        wasd-controls
+        target-indicator="target: #box;"
+      >
+        <a-cursor></a-cursor>
+      </a-entity>
+    </a-scene>
+    <script src="js/webvr-audience-client.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="assets/js/plugin.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

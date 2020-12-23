@@ -14,7 +14,6 @@
     <script src="https://unpkg.com/aframe-play-sound-on-event@1.0.2/dist/aframe-play-sound-on-event.min.js"></script>
 
     <script src="js/travel-node-component.js"></script>
-    
 
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
@@ -154,51 +153,70 @@
     <div id="preloader">
       <div class="loader-logo text-center">
         <img
-          src="https://beta-supercruisr.neocities.org/assets/white.png"
+          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fswellss.png"
           alt=""
         />
-        <p>LOADING<br>CHRISTOPHER</p>
+        <p>UPLOADING<br />CHRISTOPHER</p>
       </div>
     </div>
-
-    <!-- Start Header -->
-
-    <nav>
-      <div class="logo">
-        <a href="/public/navigation-centre.html"
-          ><img
-            src="https://beta-supercruisr.neocities.org/assets/white.png"
-            alt="logo"
-        /></a>
-      </div>
-      <div class="toggle-btn">
-        <div class="burger-menu">
-          <span class="one"></span>
-          <span class="two"></span>
-          <span class="tre"></span>
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="index.html"
+            ><img
+              src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fswellss.png"
+              alt="logo"
+          /></a>
         </div>
-      </div>
+        <div class="toggle-btn">
+          <div class="burger-menu">
+            <span class="one"></span>
+            <span class="two"></span>
+            <span class="tre"></span>
+          </div>
+        </div>
 
-      <div class="bg-nav"></div>
+        <div class="bg-nav"></div>
 
-      <div class="manu-container">
-        <div class="menu">
-          <div class="data">
-            <div class="container">
-               <ul>
-                <li>
-                  <a class="menu-link" href="../index.html"
-                    >Build Your Own</a
-                  >
-                </li>
-              </ul>
+        <div class="manu-container">
+          <div class="menu">
+            <div class="data">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="links text-center text-lg-left">
+                      <ul>
+                        <li>
+                          <a class="menu-link active" href="ar.html"
+                            >Build Your Own AR Website</a
+                          >
+                        </li>
+                        <li>
+                          <a class="menu-link" href="/navigation-centre.html"
+                            >Explore my XR Browser</a
+                          >
+                        </li>
+                        <li>
+                          <a class="menu-link" href="/models.html"
+                            >3D Model Viewer</a
+                          >
+                        </li>
+
+                        <li>
+                          <a class="menu-link" href="#" data-scroll-nav="7"
+                            >Contact</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-         
-          </div>
         </div>
-     
-    </nav>
+      </nav>
+    </header>
     <a-scene>
       <a-camera look-controls cursor="rayOrigin: mouse">
         <!--a-entity
@@ -218,13 +236,11 @@
         controller-cursor
       ></a-entity>
 
-      
       <a-entity
         environment="dressing: none; ground: flat; fog: 0; skyType: none; groundColor: #111;gridColor: #202020; grid: 2x2; groundTexture: none"
       ></a-entity>
-     
 
-    <a-entity id="catalog" scale=".2 .2 .2" position="0 1.1 -1.05">
+      <a-entity id="catalog" scale=".2 .2 .2" position="0 1.1 -1.05">
         <a-entity
           class="container"
           id="container"
@@ -273,7 +289,7 @@
         </a-entity>
 
         <a-entity id="menu" position="-3.06 4.98 0" scale=".35 .35 .35">
-         <a-entity
+          <a-entity
             link="href: index.html"
             geometry="primitive: plane; width: 3.4; height: 1"
             material="color: #606060"

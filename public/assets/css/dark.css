@@ -4355,7 +4355,7 @@ body {
 }
 
 .menu-text p {
-  font-weight: 300;
+  font-weight: 150;
   line-height: 30px;
   color: #fff;
 }
@@ -4631,17 +4631,17 @@ span.number {
   background-image: -moz-linear-gradient(
     90deg,
     rgb(0, 0, 0) 0%,
-    rgb(255, 69, 69) 100%
+    rgb(204, 204, 204); 100%
   );
   background-image: -webkit-linear-gradient(
     90deg,
     rgb(0, 0, 0) 0%,
-    rgb(255, 69, 69) 100%
+    rgb(204, 204, 204);) 100%
   );
   background-image: -ms-linear-gradient(
     90deg,
     rgb(0, 0, 0) 0%,
-    rgb(255, 69, 69) 100%
+    rgb(204, 204, 204); 100%
   );
   opacity: 0.5;
   height: 100%;

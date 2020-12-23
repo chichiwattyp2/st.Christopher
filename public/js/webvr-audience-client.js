@@ -39,7 +39,11 @@ client.on("stream-added", evt => {
   document.querySelector("a-assets").appendChild(video);
   // add the new broadcaster
   const gltfModel = "#broadcaster";
+  const scale = "1 1 1"; // invert UVs (hack)
+  const offset = streamCount - 1;
+  const position = offset + " 2.3 -3";
 
+  const rotation = "180 90 0";
 
   const parent = document.querySelector("a-scene");
   var newBroadcaster = document.createElement("a-gltf-model");
@@ -59,7 +63,7 @@ client.on("stream-added", evt => {
         var texture = new THREE.VideoTexture(video);
         texture.minFilter = THREE.LinearFilter;
         texture.magFilter = THREE.LinearFilter;
-
+        texture.flipY = false;
         // set node's material map to video texture
         node.material.map = texture;
         node.material.color = new THREE.Color();
