@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>GLTF Model Customizer</title>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
+		<link rel="stylesheet" href="/van.css">
+		<script src="js/index.js" async ></script>
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '1924189741243989',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v2.12'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+	</head>
+	<body>
+    <button id='download'>
+        Download 3D file for Facebook
+      </button>
+    <div class="instructions">
+      <p>
+        Drop an image on the 3d model to customize it.
+      </p>
+      <p>
+        Create your own model customizer on <a href="https://glitch.com/edit/#!/gltf-model-customizer?path=README.md:1:0">Glitch</a>
+      </p>
+      <p>
+        Log in to choose photos from Facebook
+        
+      </p>
+      <fb:login-button scope="public_profile,user_photos" onlogin="checkLoginState();">
+      </fb:login-button>  
+    </div>
+      
+		<div class="attribution">
+      
+			<div class="twitter-logo"></div>
+			<a href="https://twitter.com/msfeldstein">@msfeldstein</a> and <a href="https://twitter.com/oceanquigley">@oceanquigley</a>
+		</div>
+	</body>
+</html>
