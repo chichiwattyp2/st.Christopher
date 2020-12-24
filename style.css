@@ -4,10 +4,7 @@
 
 /* Color Variables */
 :root {
-  --primary-color: #E1AD01;
-  --primary-color-dark: #b88e06;
-  --secondary-color: #000E1B;
-  --secondary-color-dark: #010a12;
+
   --passive-color: #f2f2f2;
   --passive-color-dark: #d9d9d9;
   --link-color: #0000ff;
@@ -23,8 +20,7 @@
 }
 
 .bold {
-  font-weight: bold;
-  color: var(--link-color);
+
 }
 
 .lead {
@@ -196,12 +192,7 @@ page-footer {
 }
 
 .coordinates-input-container .input-number-tags {
-  padding-left: 0;
-}
 
-.add-location-container {
-  width: fit-content;
-  cursor: pointer;
 }
 
 .coordinates-input-container > div {
@@ -217,8 +208,7 @@ page-footer {
 }
 
 .remove-location-container {
-  display: flex;
-  cursor: pointer;
+
 }
 
 .add-location-container {
@@ -235,8 +225,7 @@ page-footer {
 }
 
 .map-buttons-container {
-  display: flex;
-  justify-content: space-between;
+
 }
 
 .text-input {
@@ -279,10 +268,7 @@ input:focus {
 }
 
 .buttons-container {
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  padding-right: 2em;
+
 }
 
 @keyframes blink {

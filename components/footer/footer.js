@@ -10,7 +10,7 @@ const FooterContent = `
       font-weight: bold;
       font-size: 1.75em;
       line-height: 140%;
-      color: white;
+
     }
 
     .buttons > button,
@@ -102,9 +102,9 @@ class PageFooter extends HTMLElement {
   shadow = null;
   constructor() {
     super();
-    this.shadow = this.attachShadow({ mode: "open" });
-    this.shadow.innerHTML = FooterContent;
+    this.shadow = this.attachShadow({ mode: 'open' });
+    this.shadow.innerHTML = FooterContent
   }
 }
 
-customElements.define("page-footer", PageFooter);
+customElements.define('page-footer', PageFooter);
