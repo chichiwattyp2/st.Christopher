@@ -1,46 +1,34 @@
-@font-face {
-  font-family: "Telegraf";
-  src: url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.eot");
-  src: url("fonts/Telegraf-Regular.eot?#iefix") format("embedded-opentype"),
-    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff2")
-      format("woff2"),
-    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.woff")
-      format("woff"),
-    url("fonts/Telegraf-Regular.ttf") format("truetype"),
-    url("https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FTelegraf-Regular.svg")
-      format("svg");
-}
-
-font-family: "grifterbold";
-src: url("https://beta-supercruisr.neocities.org/assets/css/grifterbold-webfont.woff2")
-    format("woff2"),
-  url("https://beta-supercruisr.neocities.org/assets/css/grifterbold-webfont.woff")
-    format("woff");
-font-weight: normal;
-font-style: normal;
+/* Google fonts */
+@import url("https://fonts.googleapis.com/css?family=Chakra+Petch&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
 
 /* Color Variables */
 :root {
-  --primary-color: #ffffff;
-  --primary-color-dark: #fffffff;
-  --secondary-color: #fffff;
-  --secondary-color-dark: #ffffff;
-  --passive-color: #ffffff;
-  --passive-color-dark: #ffffff;
-  --link-color: #fffffff;
+  --primary-color: #E1AD01;
+  --primary-color-dark: #b88e06;
+  --secondary-color: #000E1B;
+  --secondary-color-dark: #010a12;
+  --passive-color: #f2f2f2;
+  --passive-color-dark: #d9d9d9;
+  --link-color: #0000ff;
   --max-z-index: 99999;
 }
 
 /* Typography */
 .title {
-  font-family: Telegraf;
+  font-family: Chakra Petch;
   font-style: normal;
   font-weight: bold;
   font-size: 3em;
 }
 
+.bold {
+  font-weight: bold;
+  color: var(--link-color);
+}
+
 .lead {
-  font-family: Telegraf;
+  font-family: Chakra Petch;
   font-style: normal;
   font-weight: bold;
   font-size: 1.75em;
@@ -51,7 +39,7 @@ font-style: normal;
 .small,
 .link,
 .error {
-  font-family: Telegraf;
+  font-family: Source Sans Pro;
   font-style: normal;
   font-weight: normal;
   line-height: 140%;
@@ -82,51 +70,52 @@ font-style: normal;
 .secondary-button,
 .passive-button {
   display: inline-block;
-  font-family: Telegraf;
+  font-family: Chakra Petch;
   font-style: normal;
   font-weight: 600;
   font-size: 1em;
   line-height: 1.25em;
   height: 3.5em;
-  border: none;
-  border: 1px solid #ffffff;
+  border: 1.5px solid black;
   box-sizing: border-box;
-
+  box-shadow: 10px 10px 0px black;
+  border-radius: 10px;
   padding: 1em 1.25em;
   margin: 1.875em 0;
   text-decoration: none;
-  color: #ffffff;
+  color: black;
   cursor: pointer;
 }
 
 .primary-button:active,
 .secondary-button:active,
 .passive-button:active {
+  box-shadow: 5px 5px 0px #000000;
   transform: translateY(4px);
 }
 
 .primary-button {
-  background: transparent;
+  background: var(--primary-color);
 }
 
 .primary-button:hover {
-  background: transparent;
+  background: var(--primary-color-dark);
 }
 
 .secondary-button {
-  background: transparent;
+  background: var(--secondary-color);
 }
 
 .secondary-button:hover {
-  background: transparent;
+  background: var(--secondary-color-dark);
 }
 
 .passive-button {
-  background: transparent;
+  background: var(--passive-color);
 }
 
 .passive-button:hover {
-  background: transparent;
+  background: var(--passive-color-dark);
 }
 
 .cursor-pointer {
@@ -148,7 +137,7 @@ page-header {
   align-items: center;
   position: fixed;
   width: 100%;
-  background: var(--passive-color);
+  background: var(--primary-color);
   z-index: var(--max-z-index);
 }
 
@@ -159,7 +148,7 @@ page-footer {
 }
 
 .pages-content {
-  font-family: Telegraf;
+  font-family: Source Sans Pro;
   padding: 4em 12vw;
 }
 
@@ -191,6 +180,9 @@ page-footer {
   padding: 1em 0em;
   height: 3rem;
 }
+.coordinates-input-wrapper {
+  margin-bottom: 1rem;
+}
 
 .back-anchor {
   padding: 1em;
@@ -200,10 +192,51 @@ page-footer {
 /* TODO: move .coordinates-input-container to location.css */
 .coordinates-input-container {
   display: flex;
-  align-items: center;
+  margin-bottom: 1em;
+}
+
+.coordinates-input-container .input-number-tags {
+  padding-left: 0;
+}
+
+.add-location-container {
+  width: fit-content;
+  cursor: pointer;
+}
+
+.coordinates-input-container > div {
+  padding: 1rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  text-align: justify;
+}
+
+.delete-coordinates-container > svg {
+  margin-top: 2.5rem;
+}
+
+.remove-location-container {
+  display: flex;
+  cursor: pointer;
+}
+
+.add-location-container {
+  display: flex;
+}
+
+.add-location-icon {
+  margin-right: 0.4rem;
+}
+
+.input-container label {
+  font-family: Source Sans Pro;
+  font-size: 0.875rem;
+}
+
+.map-buttons-container {
+  display: flex;
   justify-content: space-between;
-  flex-direction: row;
-  margin-bottom: 2.5rem;
 }
 
 .text-input {
@@ -212,7 +245,7 @@ page-footer {
   border-radius: 5px;
   height: 3.125rem;
   padding: 1rem 1.25rem;
-  font-family: Telegraf;
+  font-family: Source Sans Pro;
   font-size: 0.875rem;
   margin-top: 0.5rem;
 }
@@ -235,7 +268,7 @@ input:focus {
 }
 
 .beta {
-  font-family: Telegraf;
+  font-family: Source Sans Pro;
   margin-top: 5em;
   background-color: #fff700;
   padding: 1em;
@@ -243,6 +276,13 @@ input:focus {
 
 .repo-url {
   font-size: 1.25em;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  padding-right: 2em;
 }
 
 @keyframes blink {

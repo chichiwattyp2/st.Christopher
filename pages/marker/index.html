@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
- <title>St Christopher</title>
+    <title>BUILD</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,14 +10,6 @@
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="../../style.css" />
     <link rel="stylesheet" href="../../pages/marker/marker.css" />
-   <!-- Plugin CSS -->
-    <link rel="stylesheet" href="../../public/assets/css/plugin.css" />
-
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="../../public/assets/css/dark.css" />
-
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="../../public/assets/css/responsive.css" />
 
     <!-- import studio-backend api -->
     <script
@@ -26,7 +18,8 @@
     <!-- import aframe to support model preview -->
     <script src="https://aframe.io/releases/1.0.4/aframe.js"></script>
     <script src="https://cdn.statically.io/gh/donmccurdy/aframe-extras/fe293f78/dist/aframe-extras.loaders.js"></script>
-
+  <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+   
     <!-- import JsZip -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.3.0/jszip.min.js"></script>
 
@@ -34,9 +27,10 @@
     <script src="../../components/back-anchor/back-anchor.js"></script>
     <script src="../../components/file-holder/file-holder.js"></script>
     <script src="../../components/file-select/file-select.js"></script>
-    
+    <script src="../../components/header/header.js"></script>
     <script src="../../components/footer/footer.js"></script>
     <script src="../../components/model-controller/model-controller.js"></script>
+    <script src="../../components/feedback/stickybutton.js"></script>
 
     <!-- import utils -->
     <script src="../../utils/fileHelper.js"></script>
@@ -45,67 +39,21 @@
     <script src="./marker.js" defer></script>
 
 </head>
- <div id="preloader">
-      <div class="loader-logo text-center">
-        <img
-          src="https://beta-supercruisr.neocities.org/assets/white.png"
-          alt=""
-        />
-        <p>LOADING<br>CHRISTOPHER</p>
-      </div>
-    </div>
 
-    <!-- Start Header -->
-
-    <nav>
-      <div class="logo">
-        <a href="index.html"
-          ><img
-            src="https://beta-supercruisr.neocities.org/assets/white.png"
-            alt="logo"
-        /></a>
-      </div>
-      <div class="toggle-btn">
-        <div class="burger-menu">
-          <span class="one"></span>
-          <span class="two"></span>
-          <span class="tre"></span>
-        </div>
-      </div>
-
-      <div class="bg-nav"></div>
-
-      <div class="manu-container">
-        <div class="menu">
-          <div class="data">
-            <div class="container">
-              <ul>
-                <li>
-                  <a class="menu-link" href="/public/index.html"
-                    >Explore WebXR</a
-                  >
-                </li>
-                
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
 <body onload="setDefaultMarker()">
-  <br><br><br><br><br><br>
+    <page-header assetsUrl="../../assets"></page-header>
+    <img class="default-marker-hidden" style="position: absolute; top: 0; right: -1000px;" src="../../assets/default-marker-no-border.png"/>
     <div class="pages-content">
         <back-anchor assetsUrl="../../assets"></back-anchor>
         <div class="pages-content-container">
             <div class="pages-content-element">
                 <p class="title">Marker-based</p>
                 <p class="paragraph">
-                    A marker-based  experience uses an image to anchor your SuperSphere.
-                    Follow the steps below to get started now.
+                    A marker-based AR experience uses a black and white image to anchor the AR content.
+                    Your scene will appear when the marker is in the field of view of your camera.
                 </p>
                 <p class="paragraph">
-                    Once you have created it, you will obtain a marker image that you have to give to the users, either
-                    on print paper (better) or shown on screen.
+                    You can print a paper version of your marker (which we recommend), or display it on a screen.
                 </p>
             </div>
         </div>
@@ -126,7 +74,7 @@
             </div>
             <div id="marker-preview" target="marker-file">
                 <div class="marker">
-                    <img src="../../assets/default-marker.png"/>
+                    <img src="../../assets/default-marker.png" alt="Default marker png"/>
                 </div>
                 <div class="download-marker" style="display: flex; justify-content: flex-end; padding: 1em 0;">
                     <div class="download-default-marker">
@@ -145,11 +93,15 @@
             <div class="pages-content-element">
                 <p class="lead">2. Choose the content </p>
                 <p class="paragraph">
-                    Select supported content with the type listed below:<br />
+                    <p>Select the type of content you would like to link to your marker and then upload the file from your computer.</p>
+                    <p class="bold">
+                        Please check the file name and remove whitepaces.
+                    </p>
                     <ul>
                         <li>3D Object (.gltf, .glb .zip; max size 50MB)</li>
                         <li>Image (.jpg, .png, .gif; max size 15MB)</li>
-                        <li>Audio (.mp3; max size 10MB)</li>
+                        <!-- TODO fix the bug for audio -->
+                        <!-- <li>Audio (.mp3; max size 10MB)</li> -->
                         <li>Video (.mp4; max size 25MB)</li>
                     </ul>
                 </p>
@@ -167,8 +119,7 @@
         <hr>
     </div>
     <page-footer></page-footer>
-   <script src="../../public/assets/js/plugin.js"></script>
-    <script src="../../public/assets/js/main.js"></script>
+    <feedback-button></feedback-button>
 </body>
 
 </html>

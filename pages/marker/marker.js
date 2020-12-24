@@ -3,12 +3,21 @@ const { MarkerModule, Package } = ARjsStudioBackend;
 var githubButton = document.querySelector('page-footer').shadowRoot.querySelector('#github-publish');
 var zipButton = document.querySelector('page-footer').shadowRoot.querySelector('#zip-publish');
 
+window.assetParam = {
+    scale: 1.0,
+    size: {
+        width: 1.0,
+        height: 1.0,
+        depth: 1.0,
+    },
+};
+
 /**
  * Initialize the default marker image on page load.
  */
 const setDefaultMarker = () => {
     const c = document.createElement('canvas');
-    const img = document.querySelector('#marker-preview .marker img');
+    const img = document.querySelector('.default-marker-hidden');
     c.height = img.naturalHeight;
     c.width = img.naturalWidth;
     const ctx = c.getContext('2d');
@@ -16,25 +25,37 @@ const setDefaultMarker = () => {
     ctx.drawImage(img, 0, 0, c.width, c.height);
     const base64String = c.toDataURL();
     window.markerImage = base64String;
+
+    MarkerModule.getFullMarkerImage(base64String, 0.5, 512, "black")
+        .then((fullMarkerImage) => {
+            window.fullMarkerImage = fullMarkerImage;
+            img.remove();
+        });
 }
 
 const checkUserUploadStatus = () => {
-    if (window.markerImage && window.assetFile) {
-        enablePageFooter();
-    }
+    enablePageFooter(window.markerImage && window.assetFile);
 }
 
 // All the required components are uploaded by the user => footer will be enable
-const enablePageFooter = () => {
-    githubButton.classList.remove('publish-disabled');
-    zipButton.classList.remove('publish-disabled');
-    zipButton.removeAttribute('disabled');
+const enablePageFooter = (enable) => {
+    if (enable) {
+        githubButton.classList.remove('publish-disabled');
+        zipButton.classList.remove('publish-disabled');
+        githubButton.removeAttribute('disabled');
+        zipButton.removeAttribute('disabled');
+    } else {
+        githubButton.classList.add('publish-disabled');
+        zipButton.classList.add('publish-disabled');
+        githubButton.setAttribute('disabled', '');
+        zipButton.setAttribute('disabled', '');
+    }
 }
 
 const zip = () => {
     // TODO: replace alerts with HTML error messages.
     if (!window.markerImage) return alert('please select a marker image');
-    if (!window.assetType) return alert('please select the corret content type');
+    if (!window.assetType) return alert('please select the correct content type');
     if (!window.assetFile || !window.assetName) return alert('please upload a content');
 
     MarkerModule.getMarkerPattern(window.markerImage)
@@ -43,7 +64,7 @@ const zip = () => {
             assetType: window.assetType, // image/audio/video/3d
             assetFile: window.assetFile,
             assetName: window.assetName,
-            assetParam: window.assetParam && (window.assetParam.isValid ? window.assetParam : null),
+            assetParam: window.assetParam,
             markerPatt: markerPattern
         })))
         .then((package) => package.serve({ packageType: 'zip' }))
@@ -81,7 +102,6 @@ const publish = () => {
                 markerImage: window.markerImage,
                 fullMarkerImage: window.fullMarkerImage,
             });
-
             window.location = '../publish';
         }
         )

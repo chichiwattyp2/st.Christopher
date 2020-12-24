@@ -95,7 +95,7 @@ const previewVideoStyle = `
 
 const previewModelStyle = `
     .modelFrame {
-        width: 23.75em;
+        width: 47.50em;
         height: 23.75em;
         object-fit: contain;
         font-size: 1.25em;
@@ -147,8 +147,11 @@ const previewImageTemplate = (fileURL, fileName, isMarker) => `
     <div class="imageFrame">
         <img id="img" src=${fileURL} alt="${fileName}">
     </div>
-    ${isMarker ? unloadMarkerTemplate(fileName, fileURL) : unloadFileTemplate(fileName, fileURL)}`;
-
+    ${
+      isMarker
+        ? unloadMarkerTemplate(fileName, fileURL)
+        : unloadFileTemplate(fileName, fileURL)
+    }`;
 
 const previewAudioTemplate = (fileURL, fileName) => `
     <style>
@@ -177,10 +180,10 @@ const previewModelTemplate = (fileURL, fileName) => `
     </style>
     <div class="modelFrame" id="modelFrame">
         <a-scene
-            renderer="logarithmicDepthBuffer: true;"
+            renderer="logarithmicDepthBuffer: false;"
             embedded
             loading-screen="enabled: false;"
-            vr-mode-ui="enabled: false">
+            vr-mode-ui="enabled: true">
             <a-assets>
                 <a-asset-item id="model" src="${fileURL}"></a-asset-item>
             </a-assets>
@@ -189,7 +192,10 @@ const previewModelTemplate = (fileURL, fileName) => `
                 <a-entity animation-mixer="loop: repeat" model-controller="target:#modelFrame" gltf-model="#model"></a-entity>
             </a-entity>
 
-            <a-sky color="#ECECEC"></a-sky>
+               <a-sky color="##192841"></a-sky>
+      <a-entity
+        environment="dressing: none; ground: flat; fog: .97; skyType: color; skyColor: #192841; groundColor: #fff;gridColor: #192841; grid: 1x1; groundTexture: none"
+      ></a-entity>
             <a-entity camera position="0 1 0">
             </a-entity>
         </a-scene>

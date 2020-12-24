@@ -4,17 +4,22 @@
   flex-direction: column;
   width: 70vw;
   min-height: 100vh;
-  background: var(--secondary-color);
+  background: white;
 }
 
 .content {
   margin-left: 1.5em;
   padding: 1.5em;
   padding-right: 20vw;
+  padding-bottom: 0;
+}
+
+.content .title {
+  margin-top: 2em;
 }
 
 .splashscreen {
-  top: 12%;
+  top: 0%;
   position: absolute;
   right: 8vw;
   height: 90%;
@@ -34,7 +39,8 @@
 
 /* Custom radio buttons */
 .radio-container {
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: relative;
   padding-left: 3em;
   margin: 1.25em 0; /* TODO: merge margin attributes */
@@ -45,6 +51,14 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.radio-container .radio-title {
+  font-weight: bold;
+}
+
+.radio-container span {
+  margin-top: 1em;
 }
 
 /* Hide the browser's default radio button */
@@ -107,8 +121,7 @@
 }
 
 @media screen and (max-width: 1280px) {
-    .splashscreen {
-        display: none;
-    }
+  .splashscreen {
+    display: none;
+  }
 }
-

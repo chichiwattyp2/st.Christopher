@@ -5,12 +5,12 @@ const FooterContent = `
     }
 
     .lead {
-      font-family: ClobberGroteskW01-Medium;
+      font-family: Chakra Petch;
       font-style: normal;
       font-weight: bold;
       font-size: 1.75em;
       line-height: 140%;
-color: #ffffff;
+      color: white;
     }
 
     .buttons > button,
@@ -20,65 +20,52 @@ color: #ffffff;
     }
 
     .paragraph {
-        font-family: ClobberGroteskW01-Medium;
+        font-family: Source Sans Pro;
         max-width: 31.25em;
+        color: white;
     }
 
-    /* Buttons */
-.primary-button,
-.secondary-button,
-.passive-button {
-  display: inline-block;
-  font-family: ClobberGroteskW01-Medium;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1em;
-  line-height: 1.25em;
-  height: 3.5em;
-  border: none;
-  border: 1px solid #ffffff;
-  box-sizing: border-box;
+    .primary-button,
+    .passive-button {
+      display: inline-block;
+      font-family: Chakra Petch;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 1em;
+      line-height: 1.25em;
+      height: 3.5em;
+      border: none;
+      border: 1.5px solid black;
+      box-sizing: border-box;
+      box-shadow: 10px 10px 0px black;
+      border-radius: 10px;
+      padding: 1em 1.25em;
+      margin: 1.875em 0;
+      text-decoration: none;
+      color: black;
+    }
 
-  padding: 1em 1.25em;
-  margin: 1.875em 0;
-  text-decoration: none;
-  color: #ffffff;
-  cursor: pointer;
-}
+    .primary-button:active,
+    .passive-button:active {
+      box-shadow: 5px 5px 0px #000000;
+      transform: translateY(4px);
+    }
 
-.primary-button:active,
-.secondary-button:active,
-.passive-button:active {
-  transform: translateY(4px);
-}
+    .primary-button {
+      background: var(--primary-color);
+    }
 
-.primary-button {
-  background: transparent;
-}
+    .primary-button:hover {
+      background: var(--primary-color-dark);
+    }
 
-.primary-button:hover {
-  background: transparent;
-}
+    .passive-button {
+      background: var(--passive-color);
+    }
 
-.secondary-button {
-  background: transparent;
-}
-
-.secondary-button:hover {
-  background: transparent;
-}
-
-.passive-button {
-  background: transparent;
-}
-
-.passive-button:hover {
-  background: transparent;
-}
-
-.cursor-pointer {
-  cursor: pointer;
-}
+    .passive-button:hover {
+      background: var(--passive-color-dark);
+    }
 
     .buttons > .publish-disabled {
         cursor: default;
@@ -93,11 +80,14 @@ color: #ffffff;
     </p>
 
     <p class="paragraph">
-      publish your Web App on Github or download the package containing all files and generated code to save it locally.
+        Your project is going to be safely hosted on GitHub - a space for code repositories online.
+    </p>
+    <p class="paragraph">
+    If you would like to save your project locally, you can also download the package containing the generated code and all supporting files.
     </p>
 
     <div class="buttons">
-      <button id="github-publish" class="primary-button publish-disabled">
+      <button id="github-publish" disabled class="primary-button publish-disabled">
         Publish on Github
       </button>
 
