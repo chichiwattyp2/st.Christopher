@@ -1,13 +1,10 @@
-// create client
-var client = AgoraRTC.createClient({ mode: "live", codec: "vp8" }); // vp8 to work across mobile devices
+// Agora settings
+const agoraAppId = "4fdfd402ce0a45ea94d850f2124f0b36";
+const channelName = "WebAR";
+var streamCount = 0;
 
 // video profile settings
 var cameraVideoProfile = "720p_6"; // 960 × 720 @ 30fps  & 750kbs
-
-var agoraAppId = "";
-var agoraAppId = "4fdfd402ce0a45ea94d850f2124f0b36";
-const channelName = "WebAR";
-var streamCount = 0;
 
 // set log level:
 // -- .DEBUG for dev
@@ -25,7 +22,8 @@ var localStreams = {
   screen: {
     id: "",
     stream: {}
-  }
+  },
+  rtmActive: false
 };
 
 // keep track of devices
@@ -34,7 +32,34 @@ var devices = {
   mics: []
 };
 
-client.init(
+// setup the RTM client and channel
+const rtmClient = AgoraRTM.createInstance(agoraAppId);
+const rtmChannel = rtmClient.createChannel(channelName);
+
+rtmClient.on("ConnectionStateChange", (newState, reason) => {
+  console.log(
+    "on connection state changed to " + newState + " reason: " + reason
+  );
+});
+
+// event listener for receiving a channel message
+rtmChannel.on("ChannelMessage", ({ text }, senderId) => {
+  // text: text of the received channel message; senderId: user ID of the sender.
+  console.log("AgoraRTM msg from user " + senderId + " recieved: \n" + text);
+  // convert from string to JSON
+  const msg = JSON.parse(text);
+  // Handle RTM msg
+  if (msg.property === "rotation") {
+    rotateModel(senderId, msg.direction, false);
+  } else if (msg.property == "position") {
+    moveModel(senderId, msg.direction, false);
+  }
+});
+
+// create RTC client
+var rtcClient = AgoraRTC.createClient({ mode: "live", codec: "vp8" }); // vp8 to work across mobile devices
+
+rtcClient.init(
   agoraAppId,
   () => {
     console.log("AgoraRTC client initialized");
@@ -45,33 +70,33 @@ client.init(
   }
 );
 
-client.on("stream-published", function(evt) {
+rtcClient.on("stream-published", function(evt) {
   console.log("Publish local stream successfully");
 });
 
 // connect remote streams
-client.on("stream-added", evt => {
+rtcClient.on("stream-added", evt => {
   const stream = evt.stream;
   const streamId = stream.getId();
   console.log("New stream added: " + streamId);
   console.log("Subscribing to remote stream:" + streamId);
-  // Subscribe to the stream.
-  client.subscribe(stream, err => {
+  // Subscribe to the remote stream
+  rtcClient.subscribe(stream, err => {
     console.log("[ERROR] : subscribe stream failed", err);
   });
 
-  streamCount++;
-  createBroadcaster(streamId);
+  streamCount++; // Increase count of Active Stream Count
+  createBroadcaster(streamId); // Load 3D model with video texture
 });
 
-client.on("stream-removed", evt => {
+rtcClient.on("stream-removed", evt => {
   const stream = evt.stream;
   stream.stop(); // stop the stream
   stream.close(); // clean up and close the camera stream
   console.log("Remote stream is removed " + stream.getId());
 });
 
-client.on("stream-subscribed", evt => {
+rtcClient.on("stream-subscribed", evt => {
   const remoteStream = evt.stream;
   const remoteId = remoteStream.getId();
   console.log(
@@ -84,30 +109,31 @@ client.on("stream-subscribed", evt => {
 });
 
 // remove the remote-container when a user leaves the channel
-client.on("peer-leave", evt => {
+rtcClient.on("peer-leave", evt => {
   console.log("Remote stream has left the channel: " + evt.uid);
   evt.stream.stop(); // stop the stream
   const remoteId = evt.stream.getId();
+  // Remove the 3D and Video elements that were created
   document.getElementById(remoteId).remove();
   document.getElementById("faceVideo-" + remoteId).remove();
-  streamCount--;
+  streamCount--; // Decrease count of Active Stream Count
 });
 
 // show mute icon whenever a remote has muted their mic
-client.on("mute-audio", evt => {
+rtcClient.on("mute-audio", evt => {
   console.log("mute-audio for: " + evt.uid);
 });
 
-client.on("unmute-audio", evt => {
+rtcClient.on("unmute-audio", evt => {
   console.log("unmute-audio for: " + evt.uid);
 });
 
 // show user icon whenever a remote has disabled their video
-client.on("mute-video", evt => {
+rtcClient.on("mute-video", evt => {
   console.log("mute-video for: " + evt.uid);
 });
 
-client.on("unmute-video", evt => {
+rtcClient.on("unmute-video", evt => {
   console.log("unmute-video for: " + evt.uid);
 });
 
@@ -116,7 +142,7 @@ function joinChannel() {
   const token = generateToken();
 
   // set the role
-  client.setClientRole(
+  rtcClient.setClientRole(
     "audience",
     () => {
       console.log("Client role set to audience");
@@ -126,14 +152,16 @@ function joinChannel() {
     }
   );
 
-  client.join(
+  rtcClient.join(
     token,
     channelName,
     0,
     uid => {
       console.log("User " + uid + " join channel successfully");
-      createBroadcaster(uid);
-      createCameraStream(uid);
+      localStreams.uid = uid;
+      createBroadcaster(uid); // Load 3D model with video texture
+      createCameraStream(uid); // Create the camera stream
+      joinRTMChannel(uid); // join the RTM channel
     },
     err => {
       console.log("[ERROR] : join channel failed", err);
@@ -142,12 +170,12 @@ function joinChannel() {
 }
 
 function leaveChannel() {
-  client.leave(
+  rtcClient.leave(
     () => {
       console.log("client leaves channel");
       localStreams.camera.stream.stop(); // stop the camera stream playback
       localStreams.camera.stream.close(); // clean up and close the camera stream
-      client.unpublish(localStreams.camera.stream); // unpublish the camera stream
+      rtcClient.unpublish(localStreams.camera.stream); // unpublish the camera stream
       //disable the UI elements
       $("#mic-btn").prop("disabled", true);
       $("#video-btn").prop("disabled", true);
@@ -188,12 +216,12 @@ function createCameraStream(uid) {
   localStream.init(
     () => {
       console.log("getUserMedia successfully");
-      // play the local stream
+      // Coonect the local stream video to the video texture
       var video = document.getElementById("faceVideo-" + uid);
       connectStreamToVideo(localStream, video);
       enableUiControls(localStream);
       // publish local stream
-      client.publish(localStream, err => {
+      rtcClient.publish(localStream, err => {
         console.log("[ERROR] : publish local stream error: " + err);
       });
       // keep track of the camera stream for later
@@ -217,12 +245,13 @@ function createBroadcaster(streamId) {
   document.querySelector("a-assets").appendChild(video);
 
   // configure the new broadcaster
-  const gltfModel = "#broadcaster";
-  const scale = "0.5 0.5 0.5";
-  const offset = streamCount;
-  const position = offset + " -3 0";
-  const rotation = "0 0 0";
 
+  const gltfModel = "#broadcaster";
+  const scale = "1 1 1"; // invert UVs (hack)
+  const offset = streamCount - 1;
+  const position = offset + " 1.3 -1";
+
+  const rotation = "180 90 0";
   // create the broadcaster element using the given settings
   const parent = document.querySelector("a-scene");
   var newBroadcaster = document.createElement("a-gltf-model");
@@ -244,7 +273,7 @@ function createBroadcaster(streamId) {
         var texture = new THREE.VideoTexture(video);
         texture.minFilter = THREE.LinearFilter;
         texture.magFilter = THREE.LinearFilter;
-        texture.flipY = true;
+        texture.flipY = false;
         // set node's material map to video texture
         node.material.map = texture;
         node.material.color = new THREE.Color();
@@ -257,8 +286,8 @@ function createBroadcaster(streamId) {
 function connectStreamToVideo(agoraStream, video) {
   video.srcObject = agoraStream.stream; // add video stream to video element as source
   video.onloadedmetadata = () => {
+    // ready to play video
     video.play();
-    console.log("::::::: ready to play video ::::::::::::::");
   };
 }
 
@@ -297,10 +326,64 @@ function changeStreamSource(deviceIndex, deviceType) {
   );
 }
 
+function joinRTMChannel(uid) {
+  console.log("uid:");
+  console.log(uid);
+  rtmClient
+    .login({ token: null, uid: String(uid) })
+    .then(() => {
+      console.log("AgoraRTM client login success");
+      // join a channel and send a message
+      rtmChannel
+        .join()
+        .then(() => {
+          // join-channel success
+          localStreams.rtmActive = true;
+          console.log("RTM Channel join success");
+          addCameraListener();
+        })
+        .catch(error => {
+          // join-channel failure
+          console.log("failed to join channel for error: " + error);
+        });
+    })
+    .catch(err => {
+      console.log("AgoraRTM client login failure", err);
+    });
+}
+
+function sendChannelMessage(action, direction) {
+  if (localStreams.rtmActive) {
+    // use a JSON object to send our instructions in a structured way
+    const jsonMsg = {
+      action: action,
+      direction: direction
+    };
+    // build the Agora RTM Message
+    const msg = {
+      description: undefined,
+      messageType: "TEXT",
+      rawMessage: undefined,
+      text: JSON.stringify(jsonMsg)
+    };
+
+    rtmChannel
+      .sendMessage(msg)
+      .then(() => {
+        // channel message-send success
+        console.log("sent msg success");
+      })
+      .catch(error => {
+        // channel message-send failure
+        console.log("sent msg failure");
+      });
+  }
+}
+
 // helper methods
 function getCameraDevices() {
   console.log("Checking for Camera Devices.....");
-  client.getCameras(cameras => {
+  rtcClient.getCameras(cameras => {
     devices.cameras = cameras; // store cameras array
     cameras.forEach((camera, i) => {
       const name = camera.label.split("(")[0];
@@ -310,19 +393,19 @@ function getCameraDevices() {
         localStreams.camera.camId = deviceId;
       }
       $("#camera-list").append(
-        '<a class="dropdown-item" id="' + optionId + '">' + name + "</a>"
+        "<a class='dropdown-item' id= " + optionId + ">" + name + "</a>"
       );
     });
     $("#camera-list a").click(event => {
       const index = event.target.id.split("_")[1];
-      changeStreamSource({ camIndex: index });
+      changeStreamSource(index, "video");
     });
   });
 }
 
 function getMicDevices() {
   console.log("Checking for Mic Devices.....");
-  client.getRecordingDevices(mics => {
+  rtcClient.getRecordingDevices(mics => {
     devices.mics = mics; // store mics array
     mics.forEach((mic, i) => {
       let name = mic.label.split("(")[0];
@@ -335,12 +418,12 @@ function getMicDevices() {
         name = "[Default Device]"; // rename the default mic - only appears on Chrome & Opera
       }
       $("#mic-list").append(
-        '<a class="dropdown-item" id="' + optionId + '">' + name + "</a>"
+        "<a class='dropdown-item' id= " + optionId + ">" + name + "</a>"
       );
     });
     $("#mic-list a").click(event => {
       const index = event.target.id.split("_")[1];
-      changeStreamSource({ micIndex: index });
+      changeStreamSource(index, "audio");
     });
   });
 }
@@ -350,10 +433,46 @@ function generateToken() {
   return null; // TODO: add a token generation
 }
 
+function rotateModel(uid, direction, send) {
+  if (send) {
+    sendChannelMessage("rotation", direction);
+  }
+  var model = document.getElementById(uid);
+  if (direction === "counter-clockwise") {
+    model.object3D.rotation.y += 0.1;
+  } else if (direction === "clockwise") {
+    model.object3D.rotation.y -= 0.1;
+  }
+}
+
+function moveModel(uid, direction, send) {
+  if (send) {
+    sendChannelMessage("position", direction);
+  }
+  var model = document.getElementById(uid);
+  switch (direction) {
+    case "forward":
+      model.object3D.position.z += 0.1;
+      break;
+    case "backward":
+      model.object3D.position.z -= 0.1;
+      break;
+    case "left":
+      model.object3D.position.x -= 0.1;
+      break;
+    case "right":
+      model.object3D.position.x += 0.1;
+      break;
+    default:
+      console.log("Unable to determin direction: " + direction);
+  }
+}
+
 // UI
 function toggleBtn(btn) {
   btn.toggleClass("btn-dark").toggleClass("btn-danger");
 }
+
 function toggleScreenShareBtn() {
   $("#screen-share-btn").toggleClass("btn-danger");
   $("#screen-share-icon")
@@ -362,6 +481,7 @@ function toggleScreenShareBtn() {
     .toggleClass("fa-slideshare")
     .toggleClass("fa-times-circle");
 }
+
 function toggleVisibility(elementID, visible) {
   if (visible) {
     $(elementID).attr("style", "display:block");
@@ -369,6 +489,7 @@ function toggleVisibility(elementID, visible) {
     $(elementID).attr("style", "display:none");
   }
 }
+
 function toggleMic() {
   toggleBtn($("#mic-btn")); // toggle button colors
   toggleBtn($("#mic-dropdown"));
@@ -381,6 +502,7 @@ function toggleMic() {
     localStreams.camera.stream.muteAudio(); // mute the local mic
   }
 }
+
 function toggleVideo() {
   toggleBtn($("#video-btn")); // toggle button colors
   toggleBtn($("#cam-dropdown"));
@@ -395,29 +517,25 @@ function toggleVideo() {
     .toggleClass("fa-video")
     .toggleClass("fa-video-slash"); // toggle the video icon
 }
+
 function enableUiControls() {
   $("#mic-btn").prop("disabled", false);
   $("#video-btn").prop("disabled", false);
   $("#exit-btn").prop("disabled", false);
+
   $("#mic-btn").click(() => {
     toggleMic();
   });
+
   $("#video-btn").click(() => {
     toggleVideo();
   });
+
   $("#exit-btn").click(() => {
     console.log("so sad to see you leave the channel");
     leaveChannel();
   });
-  $("#start-RTMP-broadcast").click(() => {
-    startLiveTranscoding();
-    $("#addRtmpConfigModal").modal("toggle");
-    $("#rtmp-url").val("");
-  });
-  $("#add-external-stream").click(() => {
-    addExternalSource();
-    $("#add-external-source-modal").modal("toggle");
-  });
+
   // keyboard listeners
   $(document).keypress(e => {
     switch (e.key) {
@@ -434,31 +552,26 @@ function enableUiControls() {
         leaveChannel();
         break;
       case "r":
-        var model = document.getElementById(localStreams.uid);
-        model.object3D.rotation.y += 0.1;
-        rotateModel(model, "positive");
-        sendRotationAsChannelMessage("start", "positive");
+        rotateModel(localStreams.uid, "counter-clockwise", true);
         break;
       case "e":
-        var model = document.getElementById(localStreams.uid);
-        model.object3D.rotation.y -= 0.1;
-        rotateModel(model, "negative");
-        sendRotationAsChannelMessage("start", "negative");
-
+        rotateModel(localStreams.uid, "clockwise", true);
         break;
-      default: // do nothing
-    }
-  });
-  $(document).keyup(e => {
-    const state = "stop";
-    switch (e.key) {
-      case "r":
-      case "e":
-        // send a msg to stop rotating
-        const state = "stop";
-        const model = document.getElementById(localStreams.uid);
-        const rotation = model.object3D.rotation.y;
-        sendRotationAsChannelMessage(state, rotation);
+      case "d":
+        // move the model forward
+        moveModel(localStreams.uid, "forward", true);
+        break;
+      case "x":
+        // move the model backward
+        moveModel(localStreams.uid, "backward", true);
+        break;
+      case "z":
+        // move the model left
+        moveModel(localStreams.uid, "left", true);
+        break;
+      case "c":
+        // move the model right
+        moveModel(localStreams.uid, "right", true);
         break;
       default: // do nothing
     }

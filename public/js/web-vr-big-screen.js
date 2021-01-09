@@ -1,7 +1,6 @@
 // create client
 var client = AgoraRTC.createClient({ mode: "live", codec: "vp8" }); // vp8 to work across mobile devices
-
-var agoraAppId = ""
+var agoraAppId = "";
 var agoraAppId = "4fdfd402ce0a45ea94d850f2124f0b36";
 const channelName = "WebAR";
 var streamCount = 0;
@@ -40,9 +39,9 @@ client.on("stream-added", evt => {
   document.querySelector("a-assets").appendChild(video);
   // add the new broadcaster
   const gltfModel = "#broadcaster";
-  const scale = "1 1 1"; // invert UVs (hack)
+  const scale = "10 10 10"; // invert UVs (hack)
   const offset = streamCount - 1;
-  const position = offset + " 2.3 -3";
+  const position = offset + " 20 -15";
 
   const rotation = "180 90 0";
 
@@ -156,60 +155,4 @@ function leaveChannel() {
 // use tokens for added security
 function generateToken() {
   return null; // TODO: add a token generation
-}
-// setup the RTM client and channel
-const rtmClient = AgoraRTM.createInstance(agoraAppId); 
-const channel = rtmClient.createChannel(channelName); 
-
-rtmClient.on('ConnectionStateChange', (newState, reason) => {
-  console.log('on connection state changed to ' + newState + ' reason: ' + reason);
-});
-
-// event listener for receiving a channel message
-channel.on('ChannelMessage', ({ text }, senderId) => { 
-  // text: text of the received channel message; senderId: user ID of the sender.
-  console.log('AgoraRTM msg from user ' + senderId + ' recieved: \n' + text);
-  var msg = text.split("-");
-  const cmd = msg[0];
-  const state = msg[1];
-  if (cmd = 'rotation') {
-    var model = document.getElementById(senderId);
-    if (state === 'start'){
-      const direction = msg[2];
-      runRotation(model, direction) 
-    } else if (state === 'end') {
-      modelRotation = msg[2];
-      rotateModel = false;
-    }
-  }
-});
-
-function joinRTMChannel(uid){
-  rtmClient.login({ token: null, uid: String(uid) }).then(() => {
-    console.log('AgoraRTM client login success');
-    // join a channel and send a message
-    rtmChannel.join().then(() => {
-      // join-channel success
-      localStreams.rtmActive = true
-      console.log('RTM Channel join success');
-    }).catch(error => {
-      // join-channel failure
-      console.log('failed to join channel for error: ' +  error);
-    });
-  }).catch(err => {
-    console.log('AgoraRTM client login failure', err);
-  });
-}
-
-function runRotation(model, direction) {
-  rotateModel = true
-  while(rotateModel) {
-    if (direction === 'positive') {
-      model.object3D.rotation.y += 0.1;
-    } else if (direction === 'negative') {
-      model.object3D.rotation.y -= 0.1;
-    }  
-  }
-  // set the final rotation after rotation ends
-  model.object3D.rotation.y = modelRotation
 }

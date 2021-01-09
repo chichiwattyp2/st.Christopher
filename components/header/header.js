@@ -1,8 +1,8 @@
 class PageHeader extends HTMLElement {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        const template = `
+    const template = `
             <style>
                 a {
                     display: grid;
@@ -42,14 +42,16 @@ class PageHeader extends HTMLElement {
             </a>
         `;
 
-        let shadow = this.attachShadow({ mode: 'open' });
-        shadow.innerHTML = template
-    }
+    let shadow = this.attachShadow({ mode: "open" });
+    shadow.innerHTML = template;
+  }
 
-    connectedCallback() {
-        this.classList.add('page-header');
-        this.shadowRoot.querySelector('.logo-img').src = `${this.getAttribute('assetsUrl')}/img/logo.png`;
-    }
+  connectedCallback() {
+    this.classList.add("page-header");
+    this.shadowRoot.querySelector(".logo-img").src = `${this.getAttribute(
+      "assetsUrl"
+    )}/img/logo.png`;
+  }
 }
 
-customElements.define('page-header', PageHeader);
+customElements.define("page-header", PageHeader);

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-
+    <title>BUILD</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,10 +15,8 @@
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" />
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" crossorigin=""
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="></script>
-
   <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
    
-
 
     <!-- import studio-backend api -->
     <script src="https://raw.githack.com/AR-js-org/studio-backend/master/dist/arjs-studio-backend.min.js"></script>
@@ -26,7 +24,7 @@
     <!-- import aframe to support model preview -->
     <script src="https://aframe.io/releases/1.0.4/aframe.js"></script>
     <script src="https://cdn.statically.io/gh/donmccurdy/aframe-extras/fe293f78/dist/aframe-extras.loaders.js"></script>
-
+ <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
     <!-- import JsZip -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.3.0/jszip.min.js"></script>
 
@@ -46,6 +44,24 @@
     <script src="../../utils/fileTemplate.js"></script>
     <script src="../../utils/fileHandler.js"></script>
     <script src="./location.js" defer></script>
+  
+    <script>
+      AFRAME.registerComponent('hide-in-ar-mode', {
+        // Set this object invisible while in AR mode.
+        // TODO: could this be replaced with bind="visible: !ar-mode"
+        // with https://www.npmjs.com/package/aframe-state-component ?
+        init: function () {
+          this.el.sceneEl.addEventListener('enter-vr', (ev) => {
+            if (this.el.sceneEl.is('ar-mode')) {
+              this.el.setAttribute('visible', false);
+            }
+          });
+          this.el.sceneEl.addEventListener('exit-vr', (ev) => {
+            this.el.setAttribute('visible', true);
+          });
+        }
+      })
+    </script>
 </head>
 
 <body>
@@ -72,7 +88,8 @@
                 <p class="paragraph">
                     Click to drop a pin on the map or enter exact GPS coordinates. You may enter up to 10 locations.
                     You can retrieve latitude and longitude from an address using <a target="_blannk" href="https://www.latlong.net/" class="link">this tool</a>.
-                </p>
+              </p></div></div> 
+            <div class="pages-content-element">
                 <div class="coordinates-input-wrapper">
                     <div class="coordinates-input-container">
                         <!-- <div>
@@ -83,16 +100,13 @@
                             <label for="longitude">Longitude:</label>
                             <input class="text-input" type="text" id="longitude" onblur="check_lat_lon()" name="longitude" />
                         </div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
+                  
+                </div></div></div>
+           
+       
 
-
-        <div class="pages-content-container">
-            <map-pick-location></map-pick-location>
-        </div>
-
+       
+          <map-pick-location></map-pick-location>
         <div class="pages-content-container">
             <div class="pages-content-element">
                 <p class="lead">2. Choose the content </p>
@@ -116,10 +130,11 @@
                 </label>
                 <p id="content-error" class="error"></p>
             </div>
-            <div id="content-preview" target="content-file">
-            </div>
-        </div>
-    </div>
+  </div></div>
+  
+            <div id="content-preview" target="content-file"> </div>
+ 
+       
     <page-footer></page-footer>
     <feedback-button></feedback-button>
 </body>

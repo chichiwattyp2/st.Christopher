@@ -1,8 +1,9 @@
 const FooterContent = `
   <style>
     #footer{
-      padding: 2em 12vw;
-    }
+      padding: 4em 12vw;  
+
+          }
 
     .lead {
       font-family: Chakra Petch;
@@ -10,7 +11,7 @@ const FooterContent = `
       font-weight: bold;
       font-size: 1.75em;
       line-height: 140%;
-
+      color: white;
     }
 
     .buttons > button,
@@ -71,6 +72,29 @@ const FooterContent = `
         cursor: default;
         opacity: 0.4;
     }
+    /* Responsive */
+@media screen and (max-width: 900px) {
+  /* Typography */
+  .title {
+    font-size: 2.5em;
+  }
+  
+  .lead {
+  width: 80%;
+  
+}
+.paragraph {
+  width: 80%;
+  
+}
+
+  .pages-content-container {
+    flex-direction: column;
+  }
+  .pages-content-element {
+    width: 100%;
+  }
+}
   </style>
 
   <div>
@@ -102,9 +126,9 @@ class PageFooter extends HTMLElement {
   shadow = null;
   constructor() {
     super();
-    this.shadow = this.attachShadow({ mode: 'open' });
-    this.shadow.innerHTML = FooterContent
+    this.shadow = this.attachShadow({ mode: "open" });
+    this.shadow.innerHTML = FooterContent;
   }
 }
 
-customElements.define('page-footer', PageFooter);
+customElements.define("page-footer", PageFooter);

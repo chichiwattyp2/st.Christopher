@@ -1,11 +1,7 @@
 <html>
   <head>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
-    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-controller-cursor-component@0.2.7/dist/aframe-controller-cursor-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="easyrtc/easyrtc.js"></script>
@@ -14,247 +10,31 @@
     <script src="https://unpkg.com/aframe-play-sound-on-event@1.0.2/dist/aframe-play-sound-on-event.min.js"></script>
     <script src="https://unpkg.com/aframe-lensflare-component/dist/aframe-lensflare-component.min.js"></script>
     <script src="js/travel-node-component.js"></script>
+    <script src="js/info-message.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
-    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-    <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
-    <script src="js/spawn-in-circle.component.js"></script>
     <script src="games-list.js"></script>
     <script src="nav.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-      crossorigin="anonymous"
-    />
 
-    <!-- Plugin CSS -->
-    <link rel="stylesheet" href="assets/css/plugin.css" />
-
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="assets/css/dark.css" />
-
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="assets/css/responsive.css" />
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- load external script files -->
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
-    />
     <link rel="stylesheet" href="css/style.css" />
-    <script>
-      AFRAME.registerComponent("typer", {
-        dependencies: ["text", "sound__typer", "sound__beep"],
-
-        schema: {
-          message: { type: "string" },
-          speed: { type: "int", default: 50 },
-          prefix: { type: "string" },
-          // suffix:      { type: 'string' },
-          cursorChar: { type: "string", default: "|" },
-          cursorSpeed: { type: "int", default: 500 },
-          wrapChar: { type: "string", default: "\\" },
-          on: { type: "string", default: "loaded" }
-          // sound assets
-        },
-
-        init: function() {
-          // this.wrapCount = this.el.components.text.data.wrapCount;
-          this.cursorVisible = true;
-          this.output = "";
-          this.char = 0;
-
-          // Throttle the function to only occur at the defined intervals within tick
-          // this.printMessage = AFRAME.utils.throttle(this.printMessage, this.data.speed, this);
-
-          this.el.addEventListener(
-            this.data.on,
-            function(e) {
-              console.log("clicked");
-
-              console.log(this.output);
-              console.log(this.char);
-
-              if (this.timer) {
-                console.log("interval exists");
-                clearInterval(this.timer);
-                this.timer = null;
-                this.char = 0;
-                this.output = "";
-                // this.el.setAttribute('text', 'value' , '');
-                this.el.components.sound__typer.stopSound();
-                return;
-              }
-
-              // Using instead of throttled tick function
-              this.timer = setInterval(
-                this.printMessage.bind(this),
-                this.data.speed
-              );
-            }.bind(this)
-          );
-        },
-
-        tick: function() {
-          // Throttled function.
-          // this.printMessage();
-        },
-
-        printMessage: function() {
-          if (this.char < this.data.message.length) {
-            if (this.char === 0) {
-              this.el.components.sound__typer.playSound();
-            }
-
-            if (this.data.message.charAt(this.char) === this.data.wrapChar) {
-              // console.log('found');
-              this.el.components.sound__typer.stopSound();
-              this.el.components.sound__typer.playSound();
-            }
-
-            // this.output += this.data.prefix;
-            this.output += this.data.message.charAt(this.char);
-            // this.output += this.data.suffix;
-            this.el.setAttribute(
-              "text",
-              "value",
-              this.data.prefix + this.output + this.data.cursorChar
-            );
-          } else if (this.char >= this.data.message.length) {
-            if (this.char === this.data.message.length) {
-              this.el.components.sound__typer.stopSound();
-              this.el.components.sound__beep.playSound();
-              // this.el.emit('beep');
-            }
-
-            if (this.char % (this.data.cursorSpeed / this.data.speed) === 0) {
-              this.cursorVisible = !this.cursorVisible;
-
-              this.el.setAttribute(
-                "text",
-                "value",
-                this.output + (this.cursorVisible ? " " : this.data.cursorChar)
-              );
-            }
-          }
-
-          this.char++;
-        }
-      });
-    </script>
   </head>
   <body>
-    <div id="preloader">
-      <div class="loader-logo text-center">
-        <img
-          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fswell.png"
-          alt=""
-        />
-        <p>UPLOADING<br />CHRISTOPHER</p>
-      </div>
-    </div>
-    <header>
-      <nav>
-        <div class="logo">
-          <a href="/navigation-centre.html"
-            ><img
-              src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fswellss.png"
-              alt="logo"
-          /></a>
-        </div>
-        <div class="toggle-btn">
-          <div class="burger-menu">
-            <span class="one"></span>
-            <span class="two"></span>
-            <span class="tre"></span>
-          </div>
-        </div>
-
-        <div class="bg-nav"></div>
-
-        <div class="manu-container">
-          <div class="menu">
-            <div class="data">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="links text-center text-lg-left">
-                      <ul>
-                        <li>
-                          <a class="menu-link active" href="./ar.html"
-                            >Build Your Own AR Website</a
-                          >
-                        </li>
-                        <li>
-                          <a class="menu-link" href="/navigation-centre.html"
-                            >Explore my XR Browser</a
-                          >
-                        </li>
-                        <li>
-                          <a class="menu-link" href="/models.html"
-                            >3D Model Viewer</a
-                          >
-                        </li>
-
-                        <li>
-                          <a class="menu-link" href="#" data-scroll-nav="7"
-                            >Contact</a
-                          >
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 offset-lg-2 centered text-right">
-                    <div class="address-menu">
-                      <a class="menu-link" href="/models.html">XR Index</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <a-scene>
+    <a-scene
+      device-orientation-permission-ui="enabled: true"
+      info-message="htmlSrc: #messageText"
+    >
       <a-assets>
         <audio
           id="click-sound"
           crossorigin="anonymous"
           src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
         ></audio>
-        <img
-          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fflare1.jpg"
-          alt="Test Lensflare Asset"
-          id="flare-asset"
-        />
-        <img
-          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fflare2.jpg"
-          alt="Test Lensflare Asset 2"
-          id="flare-asset-2"
-        />
-        <img
-          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fflare3.jpg"
-          alt="Test Lensflare Asset 3"
-          id="flare-asset-3"
-        />
-        <img
-          id="logo"
-          crossorigin="anonymous"
-          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fswell.png"
-        />
-        <img
-          id="sky"
-          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fdome.jpeg"
-        />
+        <a-asset-item
+          id="stage1"
+          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FStage1.glb"
+        ></a-asset-item>
+        <a-asset-item id="messageText" src="message.html"></a-asset-item>
       </a-assets>
+
       <a-camera look-controls cursor="rayOrigin: mouse" position="0 1.5 1.255">
         <!--a-entity
         animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.01 0.01 0.01; to: 0.02 0.02 0.02"
@@ -266,20 +46,914 @@
         geometry="primitive: ring"></a-entity> -->
       </a-camera>
 
-      <a-entity id="leftHand" hand-controls="left" controller-cursor></a-entity>
-      <a-entity
-        id="rightHand"
-        hand-controls="right"
-        controller-cursor
-      ></a-entity>
+    <a-gltf-model src="#stage1" position="0 0.64815 0" scale="0.7 0.7 0.7" gltf-model="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2FStage1.glb">
+        </a-gltf-model>
 
-      <a-entity id="catalog" scale=".3 .3 .3" position="0 1.25 -1.05">
-        <a-entity
-          class="container"
-          id="container"
-          position="-3.15 4 0"
+      <a-entity
+        id="catalog"
+        scale="0.35 0.35 0.35"
+        position="6.28005 -0.4472 -8.39599"
+        rotation="0 -90 0"
+      >
+        <a-entity class="container" id="container" position="-3.15 4 0"
+          ><a-image
+            position=""
+            width="2"
+            height="1"
+            link="href: /public/webar.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F2.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-0; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-0; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: WebAR"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-0"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="2.1 0 0"
+            width="2"
+            height="1"
+            link="href: /public/models.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F3.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-1; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-1; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Model-Viewer"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-1"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="4.2 0 0"
+            width="2"
+            height="1"
+            link="href: /public/xr-broadcaster.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F4.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-2; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-2; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: XR Broadcaster"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-2"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="6.3 0 0"
+            width="2"
+            height="1"
+            link="href: /public/virtual-con.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F5.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-3; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-3; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: VR Conference"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-3"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="0 -1.3 0"
+            width="2"
+            height="1"
+            link="href: /public/videochat.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F6.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-4; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-4; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Video Chat"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-4"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="2.1 -1.3 0"
+            width="2"
+            height="1"
+            link="href: /public/video-player.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F7.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-5; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-5; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Video Player"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-5"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="4.2 -1.3 0"
+            width="2"
+            height="1"
+            link="href: /public/transmission.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F8.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-6; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-6; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Media Tunnel"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-6"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="6.3 -1.3 0"
+            width="2"
+            height="1"
+            link="href: /public/tour.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F9.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-7; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-7; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Tour"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-7"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="0 -2.6 0"
+            width="2"
+            height="1"
+            link="href: /public/room.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F10.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-8; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-8; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Room"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-8"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="2.1 -2.6 0"
+            width="2"
+            height="1"
+            link="href: /public/rooftop.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F11.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-9; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-9; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Rooftop"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-9"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="4.2 -2.6 0"
+            width="2"
+            height="1"
+            link="href: /public/portfolio.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F12.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-10; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-10; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Portfolio"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-10"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="6.3 -2.6 0"
+            width="2"
+            height="1"
+            link="href: /public/office.html"
+            src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2F1.png?"
+            event-set__enter="_event: mouseenter; _target: #highlight-11; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-11; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Office"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-11"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="0 22.1 0"
+            width="2"
+            height="1"
+            link="href: /public/new-world-order.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-12; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-12; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: NWA"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-12"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="2.1 22.1 0"
+            width="2"
+            height="1"
+            link="href: /public/music.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-13; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-13; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Music"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-13"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="4.2 22.1 0"
+            width="2"
+            height="1"
+            link="href: /public/music-studio.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-14; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-14; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Music Studio"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-14"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="6.3 22.1 0"
+            width="2"
+            height="1"
+            link="href: /public/message.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-15; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-15; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Messenger"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-15"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="0 20.8 0"
+            width="2"
+            height="1"
+            link="href: /public/meditations.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-16; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-16; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Meditations"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-16"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="2.1 20.8 0"
+            width="2"
+            height="1"
+            link="href: /public/lounge.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-17; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-17; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Lounge"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-17"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="4.2 20.8 0"
+            width="2"
+            height="1"
+            link="href: /public/lights.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-18; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-18; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Lights"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-18"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="6.3 20.8 0"
+            width="2"
+            height="1"
+            link="href: /public/cine.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-19; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-19; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Cine"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-19"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="0 19.5 0"
+            width="2"
+            height="1"
+            link="href: /public/chatrooms.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-20; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-20; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Chatrooms"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-20"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="2.1 19.5 0"
+            width="2"
+            height="1"
+            link="href: /public/broadcasting.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-21; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-21; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Broadcasting"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-21"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="4.2 19.5 0"
+            width="2"
+            height="1"
+            link="href: /public/broadcaster-tool.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-22; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-22; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Broadcast Interface"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-22"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="6.3 19.5 0"
+            width="2"
+            height="1"
+            link="href: /public/broadcaster-marker.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-23; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-23; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: AR Broadcast Audience"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-23"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="0 44.2 0"
+            width="2"
+            height="1"
+            link="href: /public/broadcaster-lounge.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-24; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-24; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: VR Broadcast Audience"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-24"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="2.1 44.2 0"
+            width="2"
+            height="1"
+            link="href: /public/arena.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-25; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-25; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: Arena"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-25"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="4.2 44.2 0"
+            width="2"
+            height="1"
+            link="href: /public/material.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-26; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-26; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: undefined"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-26"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="6.3 44.2 0"
+            width="2"
+            height="1"
+            link="href: /public/villa.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-27; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-27; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: The Villa"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-27"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="0 42.9 0"
+            width="2"
+            height="1"
+            link="href: /public/transmission.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-28; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-28; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: reciever"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-28"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="2.1 42.9 0"
+            width="2"
+            height="1"
+            link="href: /public/xr-broadcaster.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-29; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-29; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: bradcats xr"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-29"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="4.2 42.9 0"
+            width="2"
+            height="1"
+            link="href: /public/SupAR-Cam.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-30; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-30; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: teacher"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-30"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
+          ><a-image
+            position="6.3 42.9 0"
+            width="2"
+            height="1"
+            link="href: /public/SupAR-school.html"
+            src="undefined"
+            event-set__enter="_event: mouseenter; _target: #highlight-31; visible: true"
+            event-set__leave="_event: mouseleave; _target: #highlight-31; visible: false"
+            material=""
+            geometry=""
+          >
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 0.2"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              text="align: center; value: class"
+              position="0 -0.6 0"
+            ></a-entity>
+            <a-plane
+              id="highlight-31"
+              width="2.05"
+              height="1.25"
+              color="#FF926B"
+              material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+              position="0 -0.1 -0.01"
+              visible="false"
+              geometry=""
+            ></a-plane> </a-image
         ></a-entity>
-        <a-entity id="arrows" position="0 .3 .2">
+        <a-entity id="arrows" position="0 0.3 0.2">
           <a-image
             src="https://cdn.glitch.com/7036ea17-bd25-4354-8908-113fffc09696%2Farrow.png?v=1581554812160"
             id="nextArrow"
@@ -287,21 +961,25 @@
             width=".4"
             height=".25"
             rotation="0 0 90"
-            clickable
+            clickable=""
             onclick="goNext();"
+            material=""
+            geometry=""
           ></a-image>
 
           <a-text
             id="pageCounter"
-            position="-.1 0 0"
+            position="-0.1 0 0"
             value="1"
             align="center"
+            text=""
           ></a-text>
           <a-text
             id="pageTotal"
-            position=".08 0 0"
-            value="/3"
+            position="0.08 0 0"
+            value="/2"
             align="center"
+            text=""
           ></a-text>
           <a-image
             src="https://cdn.glitch.com/7036ea17-bd25-4354-8908-113fffc09696%2Farrow.png?v=1581554812160"
@@ -310,86 +988,65 @@
             width=".4"
             height=".25"
             rotation="0 0 -90"
-            clickable
+            clickable=""
             onclick="goBack();"
+            material=""
+            geometry=""
           ></a-image>
         </a-entity>
 
-        <a-entity id="menu" position="-3.06 4.98 0" scale=".35 .35 .35">
+        <a-entity id="menu" position="-3.06 4.98 0" scale="0.35 0.35 0.35">
           <a-entity
             link="href: index.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
-            material="color: #FF926B"
-            text="align:center; value:Home; width:10;"
-            position="0 0 0"
+            geometry="primitive: plane; width: 3.4"
+            material="color: #606060"
+            text="align: center; value: Home; width: 10"
+            position=""
           >
           </a-entity>
           <a-entity
             link="href: chatrooms.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
-            material="color: #FF926B"
-            text="align:center; value: WebVR; width:10;"
+            geometry="primitive: plane; width: 3.4"
+            material="color: #111"
+            text="align: center; value: Chatrooms; width: 10"
             position="3.5 0 0"
           >
           </a-entity>
           <a-entity
             link="href: meditations.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
-            material="color: #FF926B"
-            text="align:center; value: Lifestyle; width:10;"
+            geometry="primitive: plane; width: 3.4"
+            material="color: #111"
+            text="align: center; value: Meditations; width: 10"
             position="7 0 0"
           >
           </a-entity>
           <a-entity
             link="href: webar.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
-            material="color: #FF926B"
-            text="align:center; value: WebAR; width:10;"
+            geometry="primitive: plane; width: 3.4"
+            material="color: #111"
+            text="align: center; value: WebAR; width: 10"
             position="10.5 0 0"
           >
           </a-entity>
           <a-entity
             link="href: music.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
-            material="color: #FF926B"
-            text="align:center; value: Music; width:10;"
+            geometry="primitive: plane; width: 3.4"
+            material="color: #111"
+            text="align: center; value: Music; width: 10"
             position="14 0 0"
           >
           </a-entity>
           <a-entity
             link="href: broadcasting.html"
-            geometry="primitive: plane; width: 3.4; height: 1"
+            geometry="primitive: plane; width: 3.4"
             material="color: #111"
-            text="align:center; value: Social; width:10;"
+            text="align: center; value: Broadcasting; width: 10"
             position="17.5 0 0"
           >
           </a-entity>
         </a-entity>
       </a-entity>
       <a-sky src="#sky"></a-sky>
-      <a-plane
-        class="link"
-        height="1"
-        width="1"
-        position="-3.61613 1.22 -1.74849"
-        rotation="0.26 29.999999999999996 0"
-        material="shader: flat; src: #logo"
-        sound="on: click; src: #click-sound"
-        update-raycaster="#cursor"
-        event-set__enter="_event: mouseenter; _target: #Text2; visible: true"
-        event-set__leave="_event: mouseleave; _target: #Text2; visible: false"
-      >
-        <a-text
-          id="Text2"
-          value="This is your SuperCruisr Suit."
-          align="center"
-          color="#FFF"
-          visible="false"
-          position="0 -0.55 0.55"
-          geometry="primitive: plane; width: 3"
-          material="color: #000; opacity: 0.75;"
-        ></a-text>
-      </a-plane>
 
       <a-icosahedron
         travel-node="transition: move"
@@ -416,6 +1073,28 @@
         travel-node="transition: move; axis: x,z; offsetX: 0; offsetY: 0; offsetZ: 0; animationDur: 100; animationEasing: linear; travelTarget: #null"
         color="#FF926B"
         radius="0.25"
+        position="3.87628 -0.20237 -8.28053"
+        material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
+        geometry=""
+        event-set__enter="_event: mouseenter; _target: #Text; visible: true"
+        event-set__leave="_event: mouseleave; _target: #Text; visible: false"
+      >
+        <a-text
+          id="Text"
+          value="This is a checkpoint"
+          align="center"
+          color="#FFF"
+          visible="false"
+          position="0 -0.55 0.55"
+          geometry="primitive: plane; width: 2"
+          material="color: #000; opacity: 0.25"
+          text=""
+        ></a-text>
+      </a-icosahedron>
+      <a-icosahedron
+        travel-node="transition: move; axis: x,z; offsetX: 0; offsetY: 0; offsetZ: 0; animationDur: 100; animationEasing: linear; travelTarget: #null"
+        color="#FF926B"
+        radius="0.25"
         position="18.15867 1.03616 0.24634"
         material="normalMap: true; roughness: 0; metalness: 0.3; transparent: true"
         geometry=""
@@ -434,51 +1113,6 @@
           text=""
         ></a-text>
       </a-icosahedron>
-      <a-entity
-        geometry="primitive: plane; height: 2; width: 0.5"
-        material="opacity: 0"
-        typer="message: This is a web based platform that can be accessed from any browser on any device.\n\nClick on one of the items in front of you to start exploring.\n\n; on: click"
-        text="value: This is a web based platform that can be accessed |; align: center; color: white; width: 2.8; zOffset: 0.01; letterSpacing: -1; tabSize: 1; side: double"
-        position="0 1.0255 -0.80497"
-        sound__typer="src: undefined; loop: true"
-        sound__beep="src: undefined"
-        rotation="-29.999999999999996 0 0"
-        scale="0.5 0.5 0.25"
-      ></a-entity>
-      <a-light
-        id="flare-5"
-        color="grey"
-        lensflare="createLight: false; relative: true; src: #flare-asset-3; position:20 0.0 0.06; intensity:15"
-        position="35.737 2.61331 -6.50399"
-        animation="property: position; to:20 10 -9;loop:true; easing: easeInOutQuad; dir: alternate; dur:2048"
-      >
-      </a-light>
-
-      <a-light
-        id="flare-6"
-        color="grey"
-        lensflare="createLight: false; relative: true; src: #flare-asset-3; position:0.0 0.0 0.06; intensity:10"
-        position="-3 9 -6"
-        animation="property: position; to:0 10 -9;loop:true; easing: easeInOutQuad; dir: alternate; dur:2048"
-      >
-      </a-light>
-      <a-plane
-        rotation=""
-        position="0 1. -1.43578"
-        color="#111"
-        scale="2 5 5"
-        material="shader: flat"
-        geometry=""
-      ></a-plane>
-
-      <a-plane
-        rotation="90 0 0"
-        position="0 3.49 -0.450"
-        color="#111"
-        scale="2 2 5"
-        material="shader: flat"
-        geometry=""
-      ></a-plane>
     </a-scene>
     <script src="assets/js/plugin.js"></script>
     <script src="assets/js/main.js"></script>

@@ -4,8 +4,8 @@ const fileHolderTemplate = `
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 23.75em;
-      width: 23.75em;
+      height: 11.875‬em;
+    width: 11.875‬em;
       background: var(--passive-color);
       border: 1px solid var(--passive-color-dark);
       box-sizing: border-box;
@@ -30,22 +30,25 @@ class FileHolder extends HTMLElement {
   constructor() {
     super();
 
-    var shadow = this.attachShadow({ mode: 'open' });
+    var shadow = this.attachShadow({ mode: "open" });
     shadow.innerHTML = fileHolderTemplate;
-    setTimeout(function () {
-      var targetAttr = this.parentElement.getAttribute('target');
-      var target = document.querySelector('#' + targetAttr)
-      if (target) {
-        this.onclick = function () {
-          target.click();
-        };
-      }
-    }.bind(this), 500);
+    setTimeout(
+      function() {
+        var targetAttr = this.parentElement.getAttribute("target");
+        var target = document.querySelector("#" + targetAttr);
+        if (target) {
+          this.onclick = function() {
+            target.click();
+          };
+        }
+      }.bind(this),
+      500
+    );
   }
 
   connectedCallback() {
-    this.classList.add('pages-content-element');
+    this.classList.add("pages-content-element");
   }
 }
 
-customElements.define('file-holder', FileHolder);
+customElements.define("file-holder", FileHolder);

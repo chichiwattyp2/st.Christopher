@@ -20,8 +20,8 @@ const previewImageStyle = `
     .imageFrame {
         display: flex;
         position:relative;
-        width: 23.75em;
-        height: 23.75em;
+        height: 11.875‬em;
+    width: 11.875‬em;
         object-fit: contain;
         font-size: 1.25em;
         text-align: center;
@@ -95,16 +95,17 @@ const previewVideoStyle = `
 
 const previewModelStyle = `
     .modelFrame {
-        width: 47.50em;
-        height: 23.75em;
+        width: 100%;
+        height: 30em;
         object-fit: contain;
         font-size: 1.25em;
         text-align: center;
+       
     }
     .filename-container {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         cursor: pointer;
     }`;
 
@@ -179,11 +180,23 @@ const previewModelTemplate = (fileURL, fileName) => `
         ${unloadFileStyle}
     </style>
     <div class="modelFrame" id="modelFrame">
-        <a-scene
-            renderer="logarithmicDepthBuffer: false;"
-            embedded
-            loading-screen="enabled: false;"
-            vr-mode-ui="enabled: true">
+        <a-scene embedded="true" antialias="true" cursor="rayOrigin:mouse" >
+    
+
+
+ 
+      <a-entity 
+      hide-in-ar-mode
+      environment="dressing: none; ground: flat; fog: .97; skyType: color; skyColor: #111; groundColor: #111;gridColor: #202020; grid: 2x2; groundTexture: none"></a-entity>
+    
+
+
+      
+
+
+
+
+
             <a-assets>
                 <a-asset-item id="model" src="${fileURL}"></a-asset-item>
             </a-assets>
@@ -191,13 +204,12 @@ const previewModelTemplate = (fileURL, fileName) => `
             <a-entity position="0 0.9 -2">
                 <a-entity animation-mixer="loop: repeat" model-controller="target:#modelFrame" gltf-model="#model"></a-entity>
             </a-entity>
-
-               <a-sky color="##192841"></a-sky>
-      <a-entity
-        environment="dressing: none; ground: flat; fog: .97; skyType: color; skyColor: #192841; groundColor: #fff;gridColor: #192841; grid: 1x1; groundTexture: none"
-      ></a-entity>
-            <a-entity camera position="0 1 0">
-            </a-entity>
+     <a-light type="point" color="#94c6ff" distance="15" position="0 0 -12" intensity="0" animation="property: light.intensity; from: 0; to: 2; delay: 750; dur: 500"></a-light>
+      <a-light type="point" color="#94c6ff" distance="17" position="0 0 -6" intensity="0" animation="property: light.intensity; from: 0; to: 1; delay: 500; dur: 500"></a-light>
+      <a-light type="ambient" color="#4f6487" ></a-light>
+      
+            <a-camera position="0 1 0" 
+            look-controls></a-camera>
         </a-scene>
     </div>
     ${unloadFileTemplate(fileName, fileURL)}`;

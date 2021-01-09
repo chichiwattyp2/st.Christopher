@@ -1,14 +1,36 @@
-<!DOCTYPE html>
 <html>
   <head>
     <!-- container for meta tag information -->
-    <title>Transmission Tunnel</title>
+    <title>SuperCruisr - Audience</title>
 
     <meta charset="UTF-8" />
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
 
-    <script src="js/main.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="assets/css/plugin.css" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="assets/css/dark.css" />
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="js/AgoraRTCSDK-3.0.2.js" type="text/javascript"></script>
+    <script src="js/agora-rtm-sdk-1.2.2.js" type="text/javascript"></script>
+    <!-- load external script files -->
+    <script src="./travel-node-component.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
+    />
     <style>
       video {
         max-width: calc(50% - 100px);
@@ -24,309 +46,170 @@
           rgba(156, 172, 172, 0.2) 0px 64px 64px;
       }
     </style>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-play-sound-on-event@1.0.2/dist/aframe-play-sound-on-event.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+
+    <script src="travel-node-component.js"></script>
+    <script src="js/target.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-    <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
-    <script src="js/spawn-in-circle.component.js"></script>
-    <link rel="icon" type="image/svg+xml" href="assets/img/urku-ico.svg" />
-    <link rel="stylesheet" href="assets/css/aurora-pack.min.css" />
-    <link rel="stylesheet" href="assets/css/aurora-theme-base.min.css" />
-    <link rel="stylesheet" href="assets/css/urku.css" />
-    <script src="js/AgoraRTCSDK-3.0.2.js" type="text/javascript"></script>
-    <script src="js/agora-rtm-sdk-1.2.2.js" type="text/javascript"></script>
 
-    <!-- A-Frame 0.8.0 -->
-    <!-- <script src="//aframe.io/releases/0.8.0/aframe.min.js"></script> -->
-
-    <!-- A-Frame Master -->
-    <!-- <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.min.js"></script> -->
-
-    <!-- Aframe Animation -->
-    <script src="//unpkg.com/aframe-animation-component/dist/aframe-animation-component.min.js"></script>
-
-    <!-- A-Frame Area Light -->
-    <!-- <script src="https://unpkg.com/aframe-area-light-component@1.0.1/index.js"></script> -->
-
-    <!-- Hello, I'm currently writing a custom component for this, which I will publish upon completion so all can use and enjoy. Please do not steal it and claim it as your own. Thanks! -->
+    <script src="https://unpkg.com/aframe-lensflare-component/dist/aframe-lensflare-component.min.js"></script>
     <script>
-      console.clear();
-
-      var anime = AFRAME.anime;
-
-      AFRAME.registerComponent("animatetest", {
-        dependencies: ["material", "sound__hum", "animation", "area-light"],
-
-        update: function() {
-          this.el.components.sound__hum.playSound();
-
-          // These both get the volume.
-          // console.dir(this.el.components.sound__hum.data.volume);
-          // console.log(this.el.getAttribute('sound__hum').volume);
-
-          this.light = {
-            emissiveIntensity: 0,
-            areaLightIntensity: 0,
-            opacity: this.el.components.material.material.opacity,
-            volume: 0
-          };
-
-          // console.log(this.light.opacity);
-
-          this.animeUpdateHandler = animate.bind(this);
-
-          function animate() {
-            // emissiveIntensity
-            this.el.components.material.material.emissiveIntensity = this.light.emissiveIntensity;
-
-            // rectAreaLight intensity (may want to include custom property)
-            this.el.getObject3D("area-light").intensity =
-              this.light.emissiveIntensity * 10;
-
-            // opacity
-            this.el.components.material.material.opacity = this.light.opacity;
-
-            // volume
-            this.el.setAttribute("sound__hum", "volume", this.light.volume);
-          }
-
-          this.animationtest = anime({
-            targets: this.light,
-            emissiveIntensity: 1.5,
-            areaLightIntensity: 10,
-            opacity: 1,
-            volume: 0.1,
-            duration: 10000,
-            elasticity: 1000,
-            delay: function() {
-              return 5000 + anime.random(-250, 250);
-            },
-            loop: true,
-            autoplay: true,
-            update: this.animeUpdateHandler
-          });
-
-          // test: works!
-          this.animationIsPlaying = true;
-          this.time = 0;
-        },
-
-        // Works when animationIsPlaying === true;
-        tick: function(t, dt) {
-          // if (!this.animationIsPlaying) { return; }
-          // this.time += dt;
-          // this.animationtest.tick(this.time);
-        }
-      });
-
-      /**
-       * Area Light Component for elongated light distribution and reflection.
-       */
-      AFRAME.registerComponent("area-light", {
-        schema: {
-          width: { type: "number" },
-          height: { type: "number" },
-          scale: { type: "vec3" },
-          intensity: { type: "number", default: 30 },
-          color: { type: "color", default: "#ffffff" },
-          rotation: { type: "vec3", default: { x: 0, y: 360, z: 0 } },
-          showHelper: { type: "boolean", default: false }
-        },
-
+      AFRAME.registerComponent("hide-in-ar-mode", {
+        // Set this object invisible while in AR mode.
+        // TODO: could this be replaced with bind="visible: !ar-mode"
+        // with https://www.npmjs.com/package/aframe-state-component ?
         init: function() {
-          var data = this.data;
-          var height, width, scale;
-
-          // console.log( 'Data:', data );
-          // console.log( 'Object3D:', this.el.object3D );
-          // console.log( 'Object3DMap:', this.el.object3DMap );
-          // console.log( 'ComputeBoundingBox:', this.el.getObject3D('mesh').geometry.computeBoundingBox() );
-
-          scale = this.el.object3D.scale;
-          height = this.el.getAttribute("geometry").height * scale.y;
-          width = this.el.getAttribute("geometry").radius * scale.y * 2;
-
-          // console.log( 'Height:', height, 'Width:', width, 'Scale:', scale );
-
-          var rectLight = new THREE.RectAreaLight(
-            data.color,
-            data.intensity,
-            width,
-            height
-          );
-
-          rectLight.position.set((width * scale.x) / 2, 0, 0);
-          rectLight.rotation.set(
-            data.rotation.x,
-            data.rotation.y,
-            data.rotation.z
-          );
-
-          this.el.setObject3D("area-light", rectLight);
-
-          // Helper BS: Helper doesn't appear correctly in 0.7+.
-          if (data.showHelper) {
-            var helper = new THREE.RectAreaLightHelper(rectLight);
-            helper.update();
-            this.el.setObject3D("area-light-helper", helper);
-            // helper.update();
-          }
+          this.el.sceneEl.addEventListener("enter-vr", ev => {
+            if (this.el.sceneEl.is("ar-mode")) {
+              this.el.setAttribute("visible", false);
+            }
+          });
+          this.el.sceneEl.addEventListener("exit-vr", ev => {
+            this.el.setAttribute("visible", true);
+          });
         }
       });
     </script>
-    <!--build:css css/styles.min.css-->
-
-    <!-- load external script files -->
-    <script src="js/travel-node-component.js"></script>
   </head>
+  <!--BODYBODYBODYBODY -->
   <body>
-
-    <a-scene stats="false" debug>
-      <a-assets>
-        <audio
-          id="light-hum"
-          src="https://ucarecdn.com/15ebfda4-96a6-46b4-b2d1-2605df5683f0/"
-          crossorigin="anonymous"
-        ></audio>
+    <div id="preloader">
+      <div class="loader-logo text-center">
         <img
-          id="skyTexture"
-          src="https://cdn.aframe.io/a-painter/images/sky.jpg"
-          crossorigin="anonymous"
+          src="https://beta-supercruisr.neocities.org/assets/white.png"
+          alt=""
+        />
+        <p>Loading SuperCruisr</p>
+      </div>
+    </div>
+
+    <!-- Start Header -->
+
+    <nav>
+      <div class="logo">
+        <a href="/public/navigation-centre.html"
+          ><img
+            src="https://beta-supercruisr.neocities.org/assets/white.png"
+            alt="logo"
+        /></a>
+      </div>
+      <div class="toggle-btn">
+        <div class="burger-menu">
+          <span class="one"></span>
+          <span class="two"></span>
+          <span class="tre"></span>
+        </div>
+      </div>
+
+      <div class="bg-nav"></div>
+
+      <div class="manu-container">
+        <div class="menu">
+          <div class="data">
+            <div class="container">
+              <div class="loader-image">
+                <img
+                  src="https://beta-supercruisr.neocities.org/assets/blackloader.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!--ENDENDENDNEND -->
+
+    <a-scene
+      antialias="true"
+      vr-mode-ui="enabled: true"
+      loading-screen="backgroundColor: #212121"
+    >
+      <a-assets>
+        <img
+          src="https://beta-supercruisr.neocities.org/assets/flare.jpg"
+          alt="Test Lensflare Asset"
+          id="flare-asset"
+        />
+        <img
+          src="https://beta-supercruisr.neocities.org/assets/flare2.jpg"
+          alt="Test Lensflare Asset 2"
+          id="flare-asset-2"
+        />
+        <img
+          src="https://beta-supercruisr.neocities.org/assets/flare3.jpg"
+          alt="Test Lensflare Asset 3"
+          id="flare-asset-3"
         />
         <a-asset-item
           id="broadcaster"
           src="https://cdn.glitch.com/3562e692-993b-4eb4-a630-f341590dba1c%2Ftv2.glb"
         ></a-asset-item>
+
+        <img
+          id="dawn"
+          crossorigin="anonymous"
+          src="https://cdn.glitch.com/9f5d1b92-a581-4134-8864-9bd98ff8ed97%2Fdawn.jpeg"
+        />
+
+        <a-asset-item
+          id="lounge"
+          src="https://beta-supercruisr.neocities.org/assets/lounge.glb"
+        ></a-asset-item>
+
+        <!-- Define reusable 'Ground' Mixin Entity-->
+        <!-- Ground plane to detect gaze -->
       </a-assets>
+      <a-entity id="vr" hide-in-ar-mode>
+        <a-box
+          id="box"
+          position="-1.62896 0.47828 -7.71169"
+          material=""
+          geometry=""
+        ></a-box>
+        <a-plane
+          color="goldenrod"
+          width="50"
+          height="50"
+          depth="50"
+          position="0 -5 0"
+          rotation="-90 0 0"
+        ></a-plane>
 
-      <!-- CAMERA -->
-      <a-camera rotation="-15 0 0"></a-camera>
-      <a-entity id="hall" scale="2 2 2">
-        <a-entity
-          geometry="primitive: box; height: 3.2; width: 10; depth: 30;"
-          material="color: gray; side: double; transparent: true; opacity: 1;"
-          position="0 1.6 0"
-        ></a-entity>
-
-        <!-- LIGHTS -->
-
-        <a-entity
-          geometry="primitive: cylinder; radius: 0.05; height: 2;"
-          material="color: white; roughness: 0; metalness: 0.5; opacity: 0.7; shader: standard; emissive: white; emissiveIntensity: 0"
-          rotation="0 0 -90"
-          position="-2 3 -4"
-          sound__hum="src: #light-hum; autoplay: false; loop: true; volume: 0;"
-          area-light="showHelper: false; color: white; intensity: 0;"
-          animatetest
-        ></a-entity>
-
-        <a-entity
-          geometry="primitive: cylinder; radius: 0.05; height: 2;"
-          material="color: indigo; roughness: 0; metalness: 0.5; opacity: 0.7; shader: standard; emissive: indigo; emissiveIntensity: 0"
-          rotation="0 0 -90"
-          position="2 3 -4"
-          sound__hum="src: #light-hum; autoplay: false; loop: true; volume: 0;"
-          area-light="showHelper: false; color: indigo; intensity: 0;"
-          animatetest
-        ></a-entity>
+        <!-- Room -->
+        <a-sky src="#dawn"></a-sky>
+        <a-gltf-model
+          src="#lounge"
+          position="-1.92751 0.02297 3.32639"
+          scale="0.015 0.015 0.015"
+          rotation="0 15 0"
+          gltf-model="https://beta-supercruisr.neocities.org/assets/lounge.glb"
+        >
+        </a-gltf-model>
 
         <a-entity
-          geometry="primitive: cylinder; radius: 0.05; height: 2;"
-          material="color: white; roughness: 0; metalness: 0.5; opacity: 0.7; shader: standard; emissive: white; emissiveIntensity: 0"
-          rotation="0 0 -90"
-          position="-2 3 -7"
-          sound__hum="src: #light-hum; autoplay: false; loop: true; volume: 0;"
-          area-light="showHelper: false; color: white; intensity: 0;"
-          animatetest
+          light="type: hemisphere; color: #33C; groundColor: #fcba03; intensity: 2"
         ></a-entity>
-<a-entity light="type: ambient; intensity: 1"></a-entity>
-        <a-entity
-          geometry="primitive: cylinder; radius: 0.05; height: 2;"
-          material="color: red; roughness: 0; metalness: 0.5; opacity: 0.7; shader: standard; emissive: red; emissiveIntensity: 0"
-          rotation="0 0 -90"
-          position="2 3 -7"
-          sound__hum="src: #light-hum; autoplay: false; loop: true; volume: 0;"
-          area-light="showHelper: false; color: red; intensity: 0;"
-          animatetest
-        ></a-entity>
-
-        <a-entity
-          geometry="primitive: cylinder; radius: 0.05; height: 2;"
-          material="color: white; roughness: 0; metalness: 0.5; opacity: 0.7; shader: standard; emissive: white; emissiveIntensity: 0"
-          rotation="0 0 -90"
-          position="-2 3 -10"
-          sound__hum="src: #light-hum; autoplay: false; loop: true; volume: 0;"
-          area-light="showHelper: false; color: white; intensity: 0;"
-          animatetest
-        ></a-entity>
-
-        <a-entity
-          geometry="primitive: cylinder; radius: 0.05; height: 2;"
-          material="color: blue; roughness: 0; metalness: 0.5; opacity: 0.7; shader: standard; emissive: blue; emissiveIntensity: 0"
-          rotation="0 0 -90"
-          position="2 3 -10"
-          sound__hum="src: #light-hum; autoplay: false; loop: true; volume: 0;"
-          area-light="showHelper: false; color: blue; intensity: 0;"
-          animatetest
-        ></a-entity>
-
-        <!--   <a-entity geometry="primitive: cylinder; radius: 0.05; height: 2;"
-            material="color: white; roughness: 0; metalness: 0.5; opacity: 0.7; shader: standard; emissive: white; emissiveIntensity: 0"
-            rotation="0 0 -90"
-            position="0 2 -3"
-            animation_="property: material.emissiveIntensity; to: 1.5; dur: 60; elasticity: 1000; delay: 1234; loop: true;"></a-entity> -->
-
-        <!--   <a-entity geometry="primitive: cylinder; radius: 0.05; height: 2;"
-            material="color: indigo; roughness: 0; metalness: 0.5; opacity: 0.7; shader: standard; emissive: indigo; emissiveIntensity: 0;"
-            rotation="0 0 -90"
-            position="0 1 -3"
-            animation_="property: material.emissiveIntensity; to: 1.5; dur: 40; elasticity: 0; delay: 1234; loop: true;"
-            area-light_="showHelper: false; color: indigo; intensity: 10;"></a-entity> -->
       </a-entity>
-
-      <!-- Ground -->
-      <a-plane
-        material="color:#111; roughness: 0.7; metalness: 0;"
-        rotation="-90 0 0"
-        height="100"
-        width="100"
-        position="0 -0.1 0"
-      ></a-plane>
-
-      <!-- Sky -->
-
-      <!-- Default lighting that would be injected by A-Frame. -->
-      <!--   <a-entity light="type: ambient; color: #BBB"></a-entity>
-  <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity> -->
-
-      <!-- shut off default lights -->
-      <a-entity light="type: ambient; intensity: 0.1;"></a-entity>
+      <a-entity
+        position="0 1.9 0"
+        camera
+        look-controls
+        wasd-controls
+        target-indicator="target: #box;"
+      >
+        <a-cursor></a-cursor>
+      </a-entity>
     </a-scene>
-    <script>
-      // On mobile remove elements that are resource heavy
-      var isMobile = AFRAME.utils.device.isMobile();
-
-      if (isMobile) {
-        var particles = document.getElementById("particles");
-        particles.parentNode.removeChild(particles);
-      }
-
-      // Define custom schema for syncing avatar color, set by random-color
-      NAF.schemas.add({
-        template: "#avatar-template",
-        components: [
-          "position",
-          "rotation",
-          {
-            selector: ".head",
-            component: "material",
-            property: "color"
-          }
-        ]
-      });
-    </script>
     <script src="js/webvr-audience-client.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="assets/js/plugin.js"></script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

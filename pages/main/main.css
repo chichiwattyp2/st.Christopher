@@ -15,7 +15,7 @@
 }
 
 .content .title {
-
+  margin-top: 2em;
 }
 
 .splashscreen {
@@ -54,7 +54,11 @@
 }
 
 .radio-container .radio-title {
+  font-weight: bold;
+}
 
+.radio-container span {
+  margin-top: 1em;
 }
 
 /* Hide the browser's default radio button */

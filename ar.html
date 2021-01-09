@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>AR.js Studio</title>
+    <title>Studio</title>
     <link rel="shortcut icon" href="./assets/img/favicon.ico" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -21,16 +21,20 @@
     <page-header assetsUrl="assets"></page-header>
     <div class="background">
       <div class="content">
-        <p class="title">Web-enabled AR experiences</p>
+        <p class="title">Web XR - GeoDomes</p>
         <p class="paragraph">
-            AR.js Studio is an open-source AR creation platform for building custom augmented reality experiences.
-            You can create location-based or marker-based AR applications and deploy them straight to the web.
-            That means you won’t have to download any extra apps to access your experience!
-            Working with AR.js Studio doesn’t require any knowledge of coding, either.
-            You can start creating your first AR project right now.
+I’m launching a series of interactive called GeoDomes. It’s a 3d geodome that you place in the real world. you can create an entire virtual world inside of these and then give people the co-ordinates so that they can experience it.
+
+You can put these anywhere in the world as long as you know the co-ordinates but you can also use am in image or marker to trigger the GeoDome to appear.
+
+I built an interface to make it easy for anyone to create a geodome. Just 3 buttons and your done
         </p>
 
-        <img class="splashscreen" src="./assets/img/splashscreen.png" alt="Demo image home page"/>
+        <!--img
+          class="splashscreen"
+          src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fspashscreen2.png"
+          alt="Demo image home page"
+        /-->
 
         <p class="lead">Pick your project type</p>
 
@@ -44,7 +48,8 @@
               onclick="radioOnclick(this)"
             />
             <span>
-                Place your creation on a map, so it remains tied to a physical location.
+              Place your creation on a map, so it remains tied to a physical
+              location.
             </span>
             <span class="checkmark"></span>
           </label>
@@ -58,13 +63,19 @@
               onclick="radioOnclick(this)"
             />
             <span>
-                Connect your creation to a visual marker, which can be moved to any location.
+              Connect your creation to a visual marker, which can be moved to
+              any location.
             </span>
             <span class="checkmark"></span>
           </label>
 
           <div class="buttons-container">
-            <a onclick="anchorOnclick(this)" id="start-building" class="primary-button">Start building</a>
+            <a
+              onclick="anchorOnclick(this)"
+              id="start-building"
+              class="primary-button"
+              >Start building</a
+            >
           </div>
           <feedback-button></feedback-button>
           <div id="error" class="error" style="visibility: hidden;">
