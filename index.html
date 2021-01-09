@@ -1,646 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>St Christopher</title>
-    <script
-      type="module"
-      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
-    ></script>
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-      crossorigin="anonymous"
-    />
+<head>
 
-    <!-- Plugin CSS -->
-    <link rel="stylesheet" href="public/assets/css/plugin.css" />
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="public/assets/css/dark.css" />
+    <title>Christopher Watt-Pringle</title>
 
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="public/assets/css/responsive.css" />
-  </head>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
 
-  <body>
-    <header>
-      <nav>
-        <div class="logo">
-          <a href="index.html"
-            ><img
-              src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fcwp.png"
-              alt="logo"
-          /></a>
-        </div>
-        <div class="toggle-btn">
-          <div class="burger-menu">
-            <span class="one"></span>
-            <span class="two"></span>
-            <span class="tre"></span>
-          </div>
-        </div>
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
 
-        <div class="bg-nav"></div>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
-        <div class="manu-container">
-          <div class="menu">
-            <div class="data">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="links text-center text-lg-left">
-                      <ul>
-                        <li>
-                          <a class="menu-link active" href="ar.html"
-                            >GeoDomes</a
-                          >
-                        </li>
-                        <li>
-                          <a class="menu-link" href="public/index.html"
-                            >Explore XR</a
-                          >
-                        </li>
-                        <li>
-                          <a class="menu-link" href="public/modelviewer.html"
-                            >3D Model Viewer</a
-                          >
-                        </li>
-                        <li>
-                          <a class="menu-link" href="public/index.html"
-                            >Overview</a
-                          >
-                        </li>
-                        <li>
-                          <a class="menu-link" href="public/index.html"
-                            >About Me</a
-                          >
-                        </li>
-                        <li>
-                          <a class="menu-link" href="#" data-scroll-nav="7"
-                            >Contact</a
-                          >
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+    <!-- Favicon
+    ================================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon.png">
 
-                  <div class="col-lg-4 offset-lg-2 centered text-right">
-                    <div class="address-menu">
-                      <h3>ADDRESS</h3>
-                      <h4>Sandton, South Africa</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <!-- Stylesheets
+    ================================================== -->
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    <header id="masthead" class="site-header" data-anchor-target=".hero" data-top="background: rgba(255,255,255,0); padding: 30px 0; box-shadow: 0px 0px 20px 6px rgba(0, 0, 0, 0);" data-top-bottom="background: rgba(255,255,255,1); padding: 10px 0; box-shadow: 0px 0px 20px 6px rgba(0, 0, 0, 0.2);">
+        <nav id="primary-navigation" class="site-navigation">
+            <div class="container">
+                <div class="navbar-header page-scroll">
+
+                    <button type="button" class="navbar-toggle collapsed" data-target="#portfolio-perfect-collapse" aria-expanded="false" >
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                    <a href="#hero" class="site-logo"><img src="https://cdn.glitch.com/64f5a14c-7cbc-4268-931d-672ea9c31bf2%2Flogo.png" alt="logo"></a>
+
+                </div><!-- /.navbar-header -->
+
+                <div class="main-menu" id="portfolio-perfect-collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="page-scroll"><a href="#hero">Home</a></li>
+                        <li class="page-scroll"><a href="#WebXR">WebXR</a></li>
+                       <li class="page-scroll"><a href="#GeoDomes">GeoDomes</a></li>
+                       <li class="page-scroll"><a href="#Modelviewer">Model Viewer</a></li>
+                        <li class="page-scroll"><a href="#contact">Contact</a></li>
+                        
+                    </ul><!-- /.navbar-nav -->
+
+                </div><!-- /.navbar-collapse -->
+
             </div>
-          </div>
-        </div>
-      </nav>
-    </header>
+        </nav><!-- /.primary-navigation -->
+    </header><!-- /#header -->
 
-    <!-- Start Hero -->
-    <section class="hero centered" data-scroll-index="0">
-      <div class="hero-bg">
-        <div class="square"></div>
-        <div class="square-overlay"></div>
-      </div>
-
-      <div class="social title-anim">
-        <ul>
-          <li>
-            <a href="#"><i class="fab fa-instagram" aria-hidden="true"></i> </a>
-          </li>
-          <li>
-            <a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-          </li>
-          <li>
-            <a href="#"><i class="fab fa-email" aria-hidden="true"></i></a>
-          </li>
-        </ul>
-      </div>
-      <div class="container between">
-        <div class="row">
-          <div class="col-lg-6">
-            <div>
-              <div class="hero-title text-left">
-                <h3 class="title-anim">
-                  I will use your data to market to you.
-                </h3>
-                <h1 class="title-anim">
-                  I know where you go online and I know what you want to see.
-                </h1>
-                <div class="mt-20"></div>
-                <p class="title-anim">
-                  Best of all, I know where you go<br />even when your browser
-                  is closed.<br />
-
-                  I’ll advertise in those places too.
-                  <br />
-                </p>
-                <div class="mt-40 title-anim">
-                  <a class="btn-main" href="#" data-scroll-nav="1">No Thanks</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Hero -->
-
-    <!-- Start About -->
-    <section id="about" class="about parallax-scrl" data-scroll-index="1">
-      <div class="right-bg"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 order-lg-2">
-            <div class="about-text">
-              <div class="title text-left">
-                <h3>The Technology</h3>
-                <h2>Is here</h2>
-              </div>
-              <div class="about-inner mt-30">
-                <h4>
-                  Soon you’ll get some glasses, contact lenses or implants to
-                  overlay digital information onto the real world.
-                </h4>
-                <p>
-                  You wont do it because you want to be ahead of the game,
-                  you’ll do it because using computer vision and AI with
-                  genuinely make your life better. You will be able to break
-                  patters, avoid harmful situations pick up on social cues and
-                  add value to society in ways you never imaged. .<br /><br />
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 order-lg-1 centered">
-            <div class="about-img line-img">
-              <div class="about-first"></div>
-              <div class="about-overlay"></div>
-              <img
-                class="img-fluid"
-                src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fa1f36298-9f74-4b84-b0cd-fb96b98893cc_White%20Clay.png"
-                alt="1"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="between">
-      <div class="line-between"></div>
-    </div>
-    <!-- Start About -->
-    <section id="about" class="about parallax-scrl" data-scroll-index="1">
-      <div class="right-bg"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 order-lg-2">
-            <div class="about-text">
-              <div class="title text-left">
-                <h3>That being said</h3>
-                <h2>
-                  Given the chance, brands and business will take over this
-                  space.
-                </h2>
-              </div>
-              <div class="about-inner mt-30">
-                <h4>
-                  Its up to you to understand how to engage, create and curate
-                  the 3d world around you.
-                </h4>
-                <p>
-                  So who the **** am I and what the **** are you doing here?
-
-                  <br />My name is Chris and I can show you how to figure this
-                  all out Its called the metaverse. It needs an internet
-                  connection and screen or lens to access it.<br />I can show
-                  you how to create, curate and publish your own 3d data and
-                  content so that you have the ability to define your journey
-
-                  <br />
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 order-lg-1 centered">
-            <div class="about-img line-img">
-              <div class="about-first"></div>
-              <div class="about-overlay"></div>
-              <img
-                class="img-fluid"
-                src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Fa1f36298-9f74-4b84-b0cd-fb96b98893cc_White%20Clay.png"
-                alt="1"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="between">
-      <div class="line-between"></div>
-    </div>
-
-    <!-- Start Service -->
-    <section id="service" class="service parallax-scrl" data-scroll-index="2">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-5">
-            <div class="title text-left">
-              <h3>Its Called</h3>
-              <h2>The Metaverse</h2>
-            </div>
-          </div>
-        </div>
-
-        <div class="row mt-30">
-          <div class="col-lg-4 mt-30">
-            <div class="service-item bg-main">
-              <div class="service-icon text-center">
-                <img src="assets/img/service/1.png" alt="" />
-              </div>
-              <div class="service-text">
-                <h3>WebAR</h3>
-                <p>Augmented reality in your browser</p>
-                <div class="service-line"></div>
-                <ul class="service-list">
-                  <li>Marker Based</li>
-                  <li>Location Based</li>
-                  <li>Social Interaction</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-50">
-            <div class="service-item bg-second">
-              <div class="service-icon text-center">
-                <img src="assets/img/service/2.png" alt="" />
-              </div>
-              <div class="service-text">
-                <h3>WebVR</h3>
-                <p>Virtual Reality with or without a headset</p>
-                <div class="service-line"></div>
-                <ul class="service-list">
-                  <li>Websites</li>
-                  <li>Progressive Web App</li>
-                  <li>Immersive Content Creation</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-30">
-            <div class="service-item bg-main">
-              <div class="service-icon text-center">
-                <img src="assets/img/service/3.png" alt="" />
-              </div>
-              <div class="service-text">
-                <h3>WebXR</h3>
-                <p>Thats WebVR and AR</p>
-                <div class="service-line"></div>
-                <ul class="service-list">
-                  <li>Mixed Reality</li>
-                  <li>Story Telling</li>
-                  <li>Real World Tracking</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Service -->
-    <section>
-      <!-- Start Client -->
-      <div class="client mid-title">
+    <div id="hero" class="hero">
         <div class="container">
-          <div class="partner">
-            <div class="owl-carousel owl-theme">
-              <div class="item-partner">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <img
-                      src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Flogo1.png"
-                      alt="KALI"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div class="item-partner">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <img
-                      src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Flogo2.png"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div class="item-partner">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <img
-                      src="https://cdn.glitch.com/a1f36298-9f74-4b84-b0cd-fb96b98893cc%2Flogo3.png"
-                      alt="1"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End Client -->
-    </section>
-    <!-- End Testimonial -->
-    <div class="between">
-      <div class="line-between"></div>
-    </div>
-
-    <!-- 
-    <section id="team" class="team parallax-scrl" data-scroll-index="4">
-        <div class="team-text-bg"></div>
-        <div class="container">
-
             <div class="row">
 
-                <div class="col-lg-3 order-lg-2 centered">
-                    <div class="title text-left">
-                        <h3>So heres where we are going to</h3>
-                        <h2>Begin</h2>
-
+                <div class="col-md-6">
+                    <h1>Chris Watt-Pringle</h1>
+                    <div class="page-scroll">
+                        <p class="job-title">WebXR</p>
+                        <a href="#contact" class="btn btn-fill ">Hire me</a>
+                        <div class="clearfix visible-xxs"></div>
+                        <a href="#portfolio" class="btn btn-border">Explore more</a>
                     </div>
-
+                </div>
+            
+                <div class="col-md-6 text-right">
+                    <img src="assets/img/alex-vidal.png" alt="alex-vidal">
                 </div>
 
-                <div class="col-lg-9 order-lg-1 mt-10">
-                    <div class="team-slider">
-                        <div class="owl-carousel owl-theme">
-                            <div class="team-item text-center">
-                                <div class="team-img">
-                                    <img class="img-fluid" src="assets/img/team/1.png" alt="a">
-                                </div>
-                                <div class="team-text">
-                                    <h3>WebXR Examples </h3>
-                                    <p>Some of my builds</p>
-                                </div>
-                            </div>
+            </div>
+        </div>
+    </div><!-- /.hero -->
 
-                            <div class="team-item text-center">
-                                <div class="team-img">
-                                    <img class="img-fluid" src="assets/img/team/2.png" alt="a">
-                                </div>
-                                <div class="team-text">
-                                    <h3>WebAR</h3>
-                                    <p>A inteactive view</p>
-                                </div>
-                            </div>
+    <main id="main" class="site-main">
 
-                            <div class="team-item text-center">
-                                <div class="team-img">
-                                    <img class="img-fluid" src="assets/img/team/3.png" alt="a">
-                                </div>
-                                <div class="team-text">
-                                    <h3>Lets build something</h3>
-                                    <p>Lets start your journey</p>
-                                </div>
-                            </div>
+        <section id="WebXR" class="site-section section-about text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <h2>WebXR - The Web 2.0</h2><br>
+                      
+                        <p>WebXR is the latest evolution in the exploration of virtual and augmented realities; it taps the power of the web along with the unification of these realities, under one philosophical umbrella, making it easier to create immersive 3D art, interactive environments, VR tools and more.</p>
+                        <a href="https://github.com/immersive-web/webxr/blob/master/explainer.md" class="btn btn-fill" target="_blank" download>Official Explainer</a>
+                    </div>
+                </div>
+            </div>
+        </section><!-- /.secton-about -->
+
+        <section class="site-section section-skills">
+            <div class="container">
+                <div class="text-center">
+                    <h3>Better on the Web</h3>
+                    <br>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="skill">
+                            <h4>Cross Platform</h4>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-transitiongoal="100"></div><!-- /.progress-bar -->
+                            </div><!-- /.progress -->
+                        </div><!-- /.skill -->
+                        <div class="skill">
+                            <h4>Accessibile</h4>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-transitiongoal="75"></div><!-- /.progress-bar -->
+                            </div><!-- /.progress -->
+                        </div><!-- /.skill -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="skill">
+                            <h4>Automatic Improvement</h4>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-transitiongoal="82"></div><!-- /.progress-bar -->
+                            </div><!-- /.progress -->
+                        </div><!-- /.skill -->
+                        <div class="skill">
+                            <h4>Low Entry Barrier</h4>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-transitiongoal="66"></div><!-- /.progress-bar -->
+                            </div><!-- /.progress -->
+                        </div><!-- /.skill -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="skill">
+                            <h4>Rapid Development</h4>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-transitiongoal="97"></div><!-- /.progress-bar -->
+                            </div><!-- /.progress -->
+                        </div><!-- /.skill -->
+                        <div class="skill">
+                            <h4>AR/VR/MR</h4>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" data-transitiongoal="100"></div><!-- /.progress-bar -->
+                            </div><!-- /.progress -->
+                        </div><!-- /.skill -->
+                    </div>
+                </div>
+            </div>
+        </section><!-- /.secton-skills -->
+<section class="site-section section-about text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <h2>The Threat</h2><br>
+                      
+                        <p>Soon you’ll get some glasses, contact lenses or implants to overlay digital information in the form of WebXR onto the real world. You wont do it because you want to be ahead of the game, you’ll do it because using computer vision and AI with genuinely make your life better. You will be able to break patters, avoid harmful situations pick up on social cues and add value to society in ways you never imaged.
+</p><br><p>
+                      That being said. Given the chance, brands and business will take over this space. Its up to you to understand how to engage, create and curate the 3d world around you.
+
+                      </p><br><p>
+                      So who the **** am I and what the **** are you doing here?
+
+                      </p><br><p>
+                      its called the Metaverse and I'm just trying to democratize it. I can show you how to create, curate and publish your own 3d data and content so that you have the ability to define your journey
+
+                      </p>
+                        <a href="https://github.com/immersive-web/webxr/blob/master/explainer.md" class="btn btn-fill" target="_blank" download>Start Now</a>
+                    </div>
+                </div>
+            </div>
+        </section><!-- /.secton-about -->
+
+        <section id="GeoDomes" class="site-section section-services overlay text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>What i do</h3>
+                        <br>
+                      <p>
+                        I’m launching a series of interactive webxr content called geodomes. It’s a 3D geodome that you place in the real world. You can create an entire virtual world inside of these and then give people the co-ordinates so that they can experience it.
+
+You can put these anywhere in the world as long as you know the co-ordinates but you can also use am in image or marker to trigger the geodome to appear.
+
+I built an interface to make it easy for anyone to create a geodome. Just 3 buttons and your done.
+
+                      </p>
+                      <h3>What can you do with a GeoDome?</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="service">
+                            <img src="assets/img/front-end.svg" alt="Front End Developer">
+                            <h4>Social</h4>
+                            <p>Video Chat<br>
+Audio Chat<br>
+Broadcast to fans<br>
+</p>
+                        </div><!-- /.service -->
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="service">
+                            <img src="assets/img/back-end.svg" alt="Back End Developer">
+                            <h4>Art/Entertainment</h4>
+                            <p>Curate Galleries<br>
+Play Games<br>
+Stream Media<br>
+</p>
+                        </div><!-- /.service -->
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="service">
+                            <img src="assets/img/consultancy.svg" alt="Coding">
+                            <h4>Work/Collab</h4>
+                            <p>Meet in VR<br>
+Service Clients via AR<br>
+Create a virtual workplace<br>
+</p>
+                        </div><!-- /.service -->
+                    </div>
+                </div>
+            </div>
+        </section><!-- /.secton-services -->
+
+        <section id="Modelviewer" class="site-section section-portfolio">
+            <div class="container">
+                <div class="text-center">
+                    <h3>My recent Works</h3>
+                    <img src="assets/img/lines.svg" class="img-lines" alt="lines">
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-6">
+                        <div class="portfolio-item">
+                            <img src="assets/img/portfolio-1.jpg" class="img-res" alt="">
+                            <div class="portfolio-item-info">
+                                <h4>Project Title</h4>
+                                <a href="#" data-toggle="modal" data-target="#portfolioItem1"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-link"></span></a>
+                            </div><!-- /.portfolio-item-info -->
+                        </div><!-- /.portfolio-item -->
+                    </div>
+                    <div class="col-md-4 col-xs-6">
+                        <div class="portfolio-item">
+                            <img src="assets/img/portfolio-2.jpg" class="img-res" alt="">
+                            <div class="portfolio-item-info">
+                                <h4>Project Title</h4>
+                                <a href="#" data-toggle="modal" data-target="#portfolioItem2"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-link"></span></a>
+                            </div><!-- /.portfolio-item-info -->
+                        </div><!-- /.portfolio-item -->
+                    </div>
+                    <div class="col-md-4 col-xs-6">
+                        <div class="portfolio-item">
+                            <img src="assets/img/portfolio-3.jpg" class="img-res" alt="">
+                            <div class="portfolio-item-info">
+                                <h4>Project Title</h4>
+                                <a href="#" data-toggle="modal" data-target="#portfolioItem3"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-link"></span></a>
+                            </div><!-- /.portfolio-item-info -->
+                        </div><!-- /.portfolio-item -->
+                    </div>
+                    <div class="col-md-4 col-xs-6">
+                        <div class="portfolio-item">
+                            <img src="assets/img/portfolio-4.jpg" class="img-res" alt="">
+                            <div class="portfolio-item-info">
+                                <h4>Project Title</h4>
+                                <a href="#" data-toggle="modal" data-target="#portfolioItem4"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-link"></span></a>
+                            </div><!-- /.portfolio-item-info -->
+                        </div><!-- /.portfolio-item -->
+                    </div>
+                    <div class="col-md-4 col-xs-6">
+                        <div class="portfolio-item">
+                            <img src="assets/img/portfolio-5.jpg" class="img-res" alt="">
+                            <div class="portfolio-item-info">
+                                <h4>Project Title</h4>
+                                <a href="#" data-toggle="modal" data-target="#portfolioItem5"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-link"></span></a>
+                            </div><!-- /.portfolio-item-info -->
+                        </div><!-- /.portfolio-item -->
+                    </div>
+                    <div class="col-md-4 col-xs-6">
+                        <div class="portfolio-item">
+                            <img src="assets/img/portfolio-6.jpg" class="img-res" alt="">
+                            <div class="portfolio-item-info">
+                                <h4>Project Title</h4>
+                                <a href="#" data-toggle="modal" data-target="#portfolioItem6"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-link"></span></a>
+                            </div><!-- /.portfolio-item-info -->
+                        </div><!-- /.portfolio-item -->
+                    </div>
+                </div>
+            </div>
+        </section><!-- /.secton-portfolio -->
+
+        <section class="site-section section-counters text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <p class="counter start" data-to="10" data-speed="2000">0</p>
+                        <h4>Years Experience</h4>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <p class="counter start" data-to="120" data-speed="2000">0</p>       
+                        <h4>Projects Delivered</h4>      
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <p id="infinity" class="counter" data-from="0" data-to="1" data-speed="1000">0</p>
+                        <h4>Seconds on this site!<br>What are you waiting for?</h4>
+                    </div>
+                </div>
+            </div>
+        </section><!-- /.section-counters -->
+
+        <section id="contact" class="site-section section-form text-center">
+            <div class="container">
+
+                <h3>Contact</h3>
+                <img src="assets/img/lines.svg" class="img-lines" alt="lines">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" name="name" class="form-control mt-x-0" placeholder="Name" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>   
+                        </div>
+                        <div class="col-sm-12">
+                            <textarea name="message" id="mesaage" class="form-control" placeholder="Message" required></textarea>
                         </div>
                     </div>
-                    <div class="mt-40 text-center">
-                        <ul class="arrows">
-                            <li class="arrow-left -team"><img src="assets/img/arrow-light.png" alt=""></li>
-                            <li class="arrow-right -team"><img src="assets/img/arrow-light-R.png" alt=""></li>
-                        </ul>
+                    <button href="#" class="btn btn-border" type="submit">Hire Me <span class="glyphicon glyphicon-send"></span></button>
+                </form>
+            </div>
+        </section><!-- /.section-form -->
+
+    </main><!-- /#main -->
+
+    <footer id="colophon" class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <a class="icon facebook-bg" href="#"><i class="icon-facebook"></i></a>
+                    <a class="icon twitter-bg" href="#"><i class="icon-twitter"></i></a>
+                    <a class="icon gplus-bg" href="#"><i class="icon-linkedin"></i></a>
+                    <a class="icon linkedin-bg" href="#"><i class="icon-gplus"></i></a>
+                </div>
+                <div class="col-sm-4 col-sm-offset-0 col-xs-6 col-xs-offset-3"><p class="copyright">2017. All Rights Reserved</p></div>
+                <div class="col-sm-4 col-xs-3">
+                    <div class="text-right page-scroll">
+                        <a class="icon icon-up-bg" href="#hero"><i class="icon-up"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </footer><!-- /#footer -->
 
+    <!-- Modals -->
+    <div id="portfolioItem1" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+            <img class="img-res" src="assets/img/portfolio-1.jpg" alt="">
+          </div>
+          <div class="modal-body">
+            <h4 class="modal-title">Project title</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo finibus tristique. Maecenas dignissim condimentum sem eu tincidunt. Curabitur in dui quis magna vestibulum pulvinar a ut urna. Nam pellentesque mattis urna. Aenean eget lectus sit amet turpis facilisis consectetur quis vel ante. Integer in massa ut nibh ultricies sagittis imperdiet in ante. Nam sed turpis vel ante placerat feugiat ac tempus magna. Nam aliquet ullamcorper dolor non hendrerit.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-fill">Visit Page</a>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
-    <div class="between">
-      <div class="line-between"></div>
-    </div>
+    <div id="portfolioItem2" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+            <img class="img-res" src="assets/img/portfolio-2.jpg" alt="">
+          </div>
+          <div class="modal-body">
+            <h4 class="modal-title">Project title</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo finibus tristique. Maecenas dignissim condimentum sem eu tincidunt. Curabitur in dui quis magna vestibulum pulvinar a ut urna. Nam pellentesque mattis urna. Aenean eget lectus sit amet turpis facilisis consectetur quis vel ante. Integer in massa ut nibh ultricies sagittis imperdiet in ante. Nam sed turpis vel ante placerat feugiat ac tempus magna. Nam aliquet ullamcorper dolor non hendrerit.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-fill">Visit Page</a>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
+    <div id="portfolioItem3" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+            <img class="img-res" src="assets/img/portfolio-3.jpg" alt="">
+          </div>
+          <div class="modal-body">
+            <h4 class="modal-title">Project title</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo finibus tristique. Maecenas dignissim condimentum sem eu tincidunt. Curabitur in dui quis magna vestibulum pulvinar a ut urna. Nam pellentesque mattis urna. Aenean eget lectus sit amet turpis facilisis consectetur quis vel ante. Integer in massa ut nibh ultricies sagittis imperdiet in ante. Nam sed turpis vel ante placerat feugiat ac tempus magna. Nam aliquet ullamcorper dolor non hendrerit.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-fill">Visit Page</a>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="portfolioItem4" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+            <img class="img-res" src="assets/img/portfolio-4.jpg" alt="">
+          </div>
+          <div class="modal-body">
+            <h4 class="modal-title">Project title</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo finibus tristique. Maecenas dignissim condimentum sem eu tincidunt. Curabitur in dui quis magna vestibulum pulvinar a ut urna. Nam pellentesque mattis urna. Aenean eget lectus sit amet turpis facilisis consectetur quis vel ante. Integer in massa ut nibh ultricies sagittis imperdiet in ante. Nam sed turpis vel ante placerat feugiat ac tempus magna. Nam aliquet ullamcorper dolor non hendrerit.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-fill">Visit Page</a>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="portfolioItem5" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+            <img class="img-res" src="assets/img/portfolio-5.jpg" alt="">
+          </div>
+          <div class="modal-body">
+            <h4 class="modal-title">Project title</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo finibus tristique. Maecenas dignissim condimentum sem eu tincidunt. Curabitur in dui quis magna vestibulum pulvinar a ut urna. Nam pellentesque mattis urna. Aenean eget lectus sit amet turpis facilisis consectetur quis vel ante. Integer in massa ut nibh ultricies sagittis imperdiet in ante. Nam sed turpis vel ante placerat feugiat ac tempus magna. Nam aliquet ullamcorper dolor non hendrerit.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-fill">Visit Page</a>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="portfolioItem6" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+            <img class="img-res" src="assets/img/portfolio-6.jpg" alt="">
+          </div>
+          <div class="modal-body">
+            <h4 class="modal-title">Project title</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo finibus tristique. Maecenas dignissim condimentum sem eu tincidunt. Curabitur in dui quis magna vestibulum pulvinar a ut urna. Nam pellentesque mattis urna. Aenean eget lectus sit amet turpis facilisis consectetur quis vel ante. Integer in massa ut nibh ultricies sagittis imperdiet in ante. Nam sed turpis vel ante placerat feugiat ac tempus magna. Nam aliquet ullamcorper dolor non hendrerit.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-fill">Visit Page</a>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="assets/js/skrollr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-progressbar/0.9.0/bootstrap-progressbar.min.js"></script>
+    <script src="assets/js/jquery.countTo.min.js"></script>
+    <script src="assets/js/script.js"></script>
   
-
-    <div class="between">
-      <div class="line-between"></div>
-    </div>
-
-    <!-- 
-    <section id="client" data-scroll-index="6">
-        <div class="testimonial">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 mid-title">
-                        <div class="title text-center">
-                            <h3>Testimonial &</h3>
-                            <h2>Quotes</h2>
-                        </div>
-                    </div>
-                    <div class="col-lg-10 offset-lg-1 mt-20">
-                        <div class="quot-left">
-                            <i class="fa fa-quote-left" aria-hidden="true"></i>
-                        </div>
-                        <div class="quot-right">
-                            <i class="fa fa-quote-right" aria-hidden="true"></i>
-                        </div>
-                        <div class="testimonial">
-                            <div class="owl-carousel owl-theme">
-                                <div class="item-testi-slide">
-
-                                    <div class="testimonial-item text-center">
-                                        <p>" We have partnered with 8chDesign GmbH since 2011, when they first designed
-                                            our
-                                            corporate stationery. Their work ethic is very professional, reliable, and
-                                            timely. 8chDesign GmbH always goes the extra mile and thus comes highly
-                                            recommended. "</p>
-                                        <div class="author">
-                                            <p class="author-text">Nattasha, Aloka CEO</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="line-testi"></div>
-            </div>
-        </div>
-
-        
-        <div class="client mid-title">
-            <div class="container">
-
-                <div class="partner">
-                    <div class="owl-carousel owl-theme">
-                        <div class="item-partner">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <img src="assets/img/partner/1.png" alt="1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item-partner">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <img src="assets/img/partner/2.png" alt="1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item-partner">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <img src="assets/img/partner/3.png" alt="1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item-partner">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <img src="assets/img/partner/4.png" alt="1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item-partner">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <img src="assets/img/partner/5.png" alt="1">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item-partner">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <img src="assets/img/partner/6.png" alt="1">
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-       
-    </section>
-    <!-- End Testimonial -->
-
-    <div class="between">
-      <div class="line-between"></div>
-    </div>
-
-    <!-- Start Contact -->
-    <section class="contact" data-scroll-index="7">
-      <div class="left-bg"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="title">
-              <h3>Get in touch</h3>
-              <h2>Contact Me</h2>
-            </div>
-            <div class="row">
-              <div class="col-lg-6  mt-40">
-                <div class="contact-item text-left">
-                  <a href="#">Sandton, South Africa</a>
-                </div>
-              </div>
-
-              <div class="col-lg-6  mt-40">
-                <div class="contact-item text-left">
-                  <div>
-                    <h3>Say <span>Hello</span></h3>
-                    <div>
-                      <a class="mail" href="#">chriswattpringle@outlook.com</a>
-                    </div>
-                    <div class="mt-10">
-                      <a class="phone" href="#">+27767260420 +27110835819</a>
-                    </div>
-                    <div class="social mt-10">
-                      <ul>
-                        <li>
-                          <a href="#"
-                            ><i class="fab fa-instagram" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#"
-                            ><i class="fab fa-behance" aria-hidden="true"></i
-                          ></a>
-                        </li>
-                        <li>
-                          <a href="#"
-                            ><i class="fab fa-dribbble" aria-hidden="true"></i
-                          ></a>
-                        </li>
-                        <li>
-                          <a href="#"
-                            ><i class="fab fa-twitter" aria-hidden="true"></i
-                          ></a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6 mt-30">
-            <div class="about-img line-img">
-              <div class="about-first"></div>
-              <div class="about-overlay"></div>
-              <img class="img-fluid" src="assets/img/news/2.jpg" alt="" />
-            </div>
-          </div>
-
-          <div class="col-lg-12 text-left mt-40">
-            <div class="copyright">
-              <h3>Copyright © St Christopher. All rights reserved.</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Contact -->
-
-    <!-- Decoration -->
-    <!--div class="line-thumb">
-      <div class="line-col first"></div>
-      <div class="line-col second"></div>
-      <div class="line-col third"></div>
-      <div class="line-col fourth"></div>
-      <div class="line-col fifth"></div>
-    </div-->
-
-    <!-- Optional JavaScript -->
-    <script src="public/assets/js/plugin.js"></script>
-    <script src="public/assets/js/main.js"></script>
-  </body>
+</body>
 </html>
